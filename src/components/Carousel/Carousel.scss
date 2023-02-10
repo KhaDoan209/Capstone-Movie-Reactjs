@@ -1,0 +1,11 @@
+.carousel-movies {
+   .carousel-inner {
+      height: 80vh;
+      .carousel-item {
+         img {
+            width: 100%;
+            object-fit: contain;
+         }
+      }
+   }
+}
