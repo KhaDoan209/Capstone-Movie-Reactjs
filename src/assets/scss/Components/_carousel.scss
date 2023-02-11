@@ -1,10 +1,10 @@
 .carousel-movies {
    .carousel-inner {
-      height: 80vh;
+      height: 70vh;
       .carousel-item {
          img {
             width: 100%;
-            object-fit: contain;
+            object-fit: cover;
          }
       }
    }

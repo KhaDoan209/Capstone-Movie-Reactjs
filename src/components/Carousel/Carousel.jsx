@@ -1,36 +1,47 @@
 import React from 'react';
-import './Carousel.scss';
 const Carousel = (props) => {
+   let { carouselId, carouselList } = props;
+
    return (
       <>
          <div
-            id={props.carouselId}
+            id={carouselId}
             className='carousel slide carousel-movies'
             data-ride='carousel'
          >
             <div className='carousel-inner'>
-               <div className='carousel-item active'>
-                  <img
-                     src='https://movienew.cybersoft.edu.vn/hinhanh/lat-mat-48h.png'
-                     className='d-block img-fluid w-100'
-                     alt='...'
-                  />
-               </div>
-               <div className='carousel-item'>
-                  <img
-                     src='https://movienew.cybersoft.edu.vn/hinhanh/ban-tay-diet-quy.png'
-                     className='d-block img-fluid w-100'
-                     alt='...'
-                  />
-               </div>
-               <div className='carousel-item'>
-                  <img
-                     src='https://movienew.cybersoft.edu.vn/hinhanh/cuoc-chien-sinh-tu.png'
-                     className='d-block img-fluid w-100'
-                     alt='...'
-                  />
-               </div>
+               {carouselList.map((item) => {
+                  if (item.maBanner === 1) {
+                     return (
+                        <div
+                           key={item.maBanner}
+                           className='carousel-item active'
+                        >
+                           <img
+                              src={item.hinhAnh}
+                              className='d-block w-100'
+                           />
+                        </div>
+                     );
+                  }
+               })}
+               {carouselList.map((item) => {
+                  if (item.maBanner > 1) {
+                     return (
+                        <div
+                           key={item.maBanner}
+                           className='carousel-item'
+                        >
+                           <img
+                              src={item.hinhAnh}
+                              className='d-block w-100'
+                           />
+                        </div>
+                     );
+                  }
+               })}
             </div>
+
             <button
                className='carousel-control-prev'
                type='button'
@@ -40,7 +51,7 @@ const Carousel = (props) => {
                <span
                   className='carousel-control-prev-icon'
                   aria-hidden='true'
-               ></span>
+               />
                <span className='sr-only'>Previous</span>
             </button>
             <button
@@ -52,7 +63,7 @@ const Carousel = (props) => {
                <span
                   className='carousel-control-next-icon'
                   aria-hidden='true'
-               ></span>
+               />
                <span className='sr-only'>Next</span>
             </button>
          </div>

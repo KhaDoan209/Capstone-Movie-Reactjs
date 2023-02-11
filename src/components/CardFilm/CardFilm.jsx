@@ -1,10 +1,9 @@
 import React from 'react';
-import './CardFilm.scss';
+
 const CardFilm = (props) => {
-   console.log(props);
    return (
       <>
-         <div className='my-3 card-film col-12 col-sm-6 col-md-4'>
+         <div className='my-3 card-film col-12'>
             <img
                className='img-fluid'
                src={props.item.hinhAnh}
