@@ -1,0 +1,10 @@
+.home {
+   .title {
+      color: rgba(160, 40, 40, 0.699);
+      font-family: 'Oswald', sans-serif;
+   }
+   .swiper-horizontal > .swiper-pagination-bullets,
+   .swiper-pagination-bullets.swiper-pagination-horizontal {
+      position: relative;
+   }
+}
