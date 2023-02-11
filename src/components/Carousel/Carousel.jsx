@@ -5,7 +5,7 @@ const Carousel = (props) => {
       <>
          <div
             id={props.carouselId}
-            class='carousel slide carousel-movies'
+            className='carousel slide carousel-movies'
             data-ride='carousel'
          >
             <div className='carousel-inner'>
@@ -32,28 +32,28 @@ const Carousel = (props) => {
                </div>
             </div>
             <button
-               class='carousel-control-prev'
+               className='carousel-control-prev'
                type='button'
                data-target={'#' + props.carouselId}
                data-slide='prev'
             >
                <span
-                  class='carousel-control-prev-icon'
+                  className='carousel-control-prev-icon'
                   aria-hidden='true'
                ></span>
-               <span class='sr-only'>Previous</span>
+               <span className='sr-only'>Previous</span>
             </button>
             <button
-               class='carousel-control-next'
+               className='carousel-control-next'
                type='button'
                data-target={'#' + props.carouselId}
                data-slide='next'
             >
                <span
-                  class='carousel-control-next-icon'
+                  className='carousel-control-next-icon'
                   aria-hidden='true'
                ></span>
-               <span class='sr-only'>Next</span>
+               <span className='sr-only'>Next</span>
             </button>
          </div>
       </>
