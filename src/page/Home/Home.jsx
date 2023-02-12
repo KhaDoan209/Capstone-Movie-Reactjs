@@ -2,35 +2,23 @@ import React, { useState } from 'react';
 import CardFilm from '../../components/CardFilm/CardFilm';
 import Carousel from '../../components/Carousel/Carousel';
 import { useEffect } from 'react';
-import { apiMethod } from '../../services/apiMethod';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper';
 import { useDispatch, useSelector } from 'react-redux';
-import { pushCarouselToReducer } from '../../redux/reducers/carouselReducer';
-import { filmService } from '../../services/filmService';
-import { pushFilmListToReducer } from '../../redux/reducers/filmReducer';
+import {
+   getFilmBannerAction,
+   getFilmListAction,
+} from '../../redux/action/filmAction';
 import 'swiper/css';
 import 'swiper/css/pagination';
 
 const Home = () => {
    const dispatch = useDispatch();
-   const carousel = useSelector((state) => state.carousel.carouselArray);
-   const film = useSelector((state) => state.film.filmList);
-
+   const film = useSelector((state) => state.filmReducer.filmList);
+   const banner = useSelector((state) => state.filmReducer.filmBanner);
    useEffect(() => {
-      filmService
-         .getFilmList()
-         .then((result) => dispatch(pushFilmListToReducer(result.data.content)))
-         .catch((error) => console.log(error));
-   }, []);
-
-   useEffect(() => {
-      apiMethod
-         .get('/QuanLyPhim/LayDanhSachBanner')
-         .then((result) => {
-            dispatch(pushCarouselToReducer(result.data.content));
-         })
-         .catch((error) => console.log(error));
+      dispatch(getFilmListAction());
+      dispatch(getFilmBannerAction());
    }, []);
 
    let renderFilmList = () => {
@@ -50,7 +38,7 @@ const Home = () => {
       <div className='home'>
          <div className='container'>
             <Carousel
-               carouselList={carousel}
+               carouselList={banner}
                carouselId={'HomeBanner'}
             />
             <h2 className='title h2 mt-3'>Danh sách phim</h2>
@@ -67,7 +55,7 @@ const Home = () => {
          <div className='container'>
             <h2 className='title h2 mt-3'>Sắp chiếu</h2>
             <Carousel
-               carouselList={carousel}
+               carouselList={banner}
                carouselId={'HomeCommingSoon'}
             />
          </div>
