@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import CardFilm from '../../components/CardFilm/CardFilm';
 import Carousel from '../../components/Carousel/Carousel';
 import { useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination } from 'swiper';
+import { Pagination, Autoplay } from 'swiper';
 import { useDispatch, useSelector } from 'react-redux';
 import {
    getFilmBannerAction,
@@ -16,6 +16,7 @@ const Home = () => {
    const dispatch = useDispatch();
    const film = useSelector((state) => state.filmReducer.filmList);
    const banner = useSelector((state) => state.filmReducer.filmBanner);
+
    useEffect(() => {
       dispatch(getFilmListAction());
       dispatch(getFilmBannerAction());
@@ -26,6 +27,7 @@ const Home = () => {
          return (
             <SwiperSlide key={item.maPhim}>
                <CardFilm
+                  col={12}
                   key={item.maPhim}
                   item={item}
                />
@@ -43,21 +45,21 @@ const Home = () => {
             />
             <h2 className='title h2 mt-3'>Danh sách phim</h2>
             <Swiper
+               autoplay={{
+                  delay: 2500,
+                  disableOnInteraction: false,
+               }}
                pagination={(true, { clickable: true })}
                className='mySwiper'
                slidesPerView={3}
                spaceBetween={30}
-               modules={[Pagination]}
+               modules={[Autoplay, Pagination]}
             >
                {renderFilmList()}
             </Swiper>
          </div>
          <div className='container'>
-            <h2 className='title h2 mt-3'>Sắp chiếu</h2>
-            <Carousel
-               carouselList={banner}
-               carouselId={'HomeCommingSoon'}
-            />
+            <h2 className='title h2 mt-3'>Danh Sách Cụm Rạp</h2>
          </div>
       </div>
    );

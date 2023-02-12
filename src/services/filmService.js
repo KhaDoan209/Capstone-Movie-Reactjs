@@ -1,3 +1,4 @@
+import { MA_NHOM } from '../settings/settings';
 import { APIMethod } from './apiMethod';
 
 export class FilmService extends APIMethod {
@@ -5,7 +6,7 @@ export class FilmService extends APIMethod {
       super();
    }
    getFilmList = () => {
-      return this.get(`/QuanLyPhim/LayDanhSachPhim`);
+      return this.get(`QuanLyPhim/LayDanhSachPhim?maNhom=${MA_NHOM}}`);
    };
 }
 
