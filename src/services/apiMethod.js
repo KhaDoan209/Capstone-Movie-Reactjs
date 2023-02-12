@@ -3,7 +3,7 @@ import { TOKEN_CYBER } from '../settings/settings';
 import axios from 'axios';
 export class APIMethod {
    get = (url) => {
-      let promise = axios({
+      return axios({
          method: 'GET',
          url: `${API_URL}${url}`,
          maNhom: 'GP01',
@@ -11,7 +11,6 @@ export class APIMethod {
             TokenCybersoft: TOKEN_CYBER,
          },
       });
-      return promise;
    };
 }
 export const apiMethod = new APIMethod();

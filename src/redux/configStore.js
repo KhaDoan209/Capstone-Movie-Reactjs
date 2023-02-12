@@ -1,11 +1,9 @@
-import { configureStore } from '@reduxjs/toolkit';
-import carouselReducer from './reducers/carouselReducer';
-import filmReducer from './reducers/filmReducer';
-const store = configureStore({
-   reducer: {
-      carousel: carouselReducer,
-      film: filmReducer,
-   },
+import { combineReducers, createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
+import { filmReducer } from './reducers/filmReducer';
+
+const rootReducer = combineReducers({
+   filmReducer,
 });
 
-export default store;
+export const store = createStore(rootReducer, applyMiddleware(thunk));
