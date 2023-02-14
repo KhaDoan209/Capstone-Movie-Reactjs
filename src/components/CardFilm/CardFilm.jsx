@@ -1,4 +1,6 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
+import { history } from '../../App';
 
 const CardFilm = (props) => {
    return (
@@ -40,13 +42,17 @@ const CardFilm = (props) => {
                         {' '}
                         Xem chi tiết
                      </a>
-                     <a
+                     
+                     <div
                         className='h6 card-link'
-                        href=''
+                        to = {`/detail/${props.item.maPhim}`}
+                        onClick = {() => {
+                           history.push(`/detail/${props.item.maPhim}`)
+                        }}
                      >
                         {' '}
                         Đặt vé
-                     </a>
+                     </div>
                   </div>
                </div>
             </div>

@@ -2,7 +2,7 @@ import { Route } from 'react-router-dom';
 import Header from '../components/Header/Header';
 
 export const HomeTemplate = (props) => {
-   console.log(props);
+   // console.log(props);
    return (
       <Route
          exact

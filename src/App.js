@@ -5,6 +5,7 @@ import { createBrowserHistory } from 'history';
 import { HomeTemplate } from './template/HomeTemplate';
 import ShowingMovies from './page/ShowingMovies/ShowingMovies';
 import Home from './page/Home/Home';
+import Detail from './page/Detail/Detail';
 export const history = createBrowserHistory();
 function App() {
    return (
@@ -18,10 +19,14 @@ function App() {
                path='/showing-movie'
                component={ShowingMovies}
             />
+            <HomeTemplate path="/detail/:id" component={Detail} />
+
+
             <HomeTemplate
                path='/'
                component={Home}
             />
+
          </Switch>
       </Router>
    );
