@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { layThongTinChiTietPhim } from '../../redux/action/filmAction'
 import moment from 'moment/moment';
+import { NavLink } from 'react-router-dom';
 
 const { TabPane } = Tabs;
 
@@ -69,9 +70,9 @@ const Detail = (props) => {
                                             </div>
                                             <div className='thong-tin-lich-chieu row row-cols-4 mt-2'>
                                                 {cumRap.lichChieuPhim?.map((lichChieu,i) => {
-                                                return <div key={i} className="col">
+                                                return <NavLink to={`/ticketroom/${lichChieu.maLichChieu}`} key={i} className="col text-success">
                                                     {moment(lichChieu.ngayChieuGioChieu).format('hh:mm A')}
-                                                </div>
+                                                </NavLink>
                                                 })}
                                                 
                                             </div>

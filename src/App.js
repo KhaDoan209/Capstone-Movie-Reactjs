@@ -6,6 +6,7 @@ import { HomeTemplate } from './template/HomeTemplate';
 import ShowingMovies from './page/ShowingMovies/ShowingMovies';
 import Home from './page/Home/Home';
 import Detail from './page/Detail/Detail';
+import TicketRoom from './page/TicketRoom/TicketRoom';
 export const history = createBrowserHistory();
 function App() {
    return (
@@ -21,6 +22,7 @@ function App() {
             />
             <HomeTemplate path="/detail/:id" component={Detail} />
 
+            <HomeTemplate path="/ticketroom/:id" component={TicketRoom} />
 
             <HomeTemplate
                path='/'
