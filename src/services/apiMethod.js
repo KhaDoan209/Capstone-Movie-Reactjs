@@ -5,11 +5,3 @@ export class APIMethod {
    };
 }
 export const apiMethod = new APIMethod();
-// return axios({
-//    method: 'GET',
-//    url: `${API_URL}${url}`,
-//    maNhom: 'GP01',
-//    headers: {
-//       TokenCybersoft: TOKEN_CYBER,
-//    },
-// });

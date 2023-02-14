@@ -1,10 +1,11 @@
 import axios from 'axios';
-import { API_URL, TOKEN_CYBER } from '../settings/settings';
+import { API_URL, MA_NHOM, TOKEN_CYBER } from '../settings/settings';
 export const http = axios.create();
 
 http.interceptors.request.use(
    function (config) {
       config.baseURL = API_URL;
+      config.maNhom = MA_NHOM;
       config.headers = {
          TokenCybersoft: TOKEN_CYBER,
       };
@@ -14,9 +15,9 @@ http.interceptors.request.use(
       return Promise.reject(error);
    }
 );
-http.interceptors.request.use(
+
+http.interceptors.response.use(
    function (response) {
-      console.log(response);
       if (response.data.content) {
          return response.data.content;
       }
