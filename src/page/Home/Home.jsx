@@ -13,10 +13,8 @@ import {
    getLichChieuHeThongRapAction,
    getRapFilmAction,
 } from '../../redux/action/rapFilmAction';
-import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
-import { Grid, GridItem } from '@chakra-ui/react';
 const Home = () => {
    const dispatch = useDispatch();
    const film = useSelector((state) => state.filmReducer.filmList);
@@ -25,6 +23,7 @@ const Home = () => {
    const lichChieuHeThongRap = useSelector(
       (state) => state.rapPhimReducer.lichChieuHeThongRap
    );
+
    useEffect(() => {
       dispatch(getFilmListAction());
       dispatch(getFilmBannerAction());
@@ -33,69 +32,105 @@ const Home = () => {
 
    useEffect(() => {
       rapFilm.map((item) => {
-         if (item.maHeThongRap == 'BHDStar') {
+         if (rapFilm.indexOf(item) == 0) {
             dispatch(getLichChieuHeThongRapAction(`${item.maHeThongRap}`));
          }
       });
    }, [rapFilm]);
 
    let getLichChieuHeThongRap = (maHeThongRap) => {
-      console.log(maHeThongRap);
-      rapFilm.map((item) => {
-         if (item.maHeThongRap == maHeThongRap) {
-            dispatch(getLichChieuHeThongRapAction(`${item.maHeThongRap}`));
-         }
-      });
+      dispatch(getLichChieuHeThongRapAction(`${maHeThongRap}`));
    };
-   let renderCumRap = () => {
-      return lichChieuHeThongRap.map((item) => {
-         return item.lstCumRap.map((ele) => {
-            return (
-               <TabPanels>
-                  <TabPanel>
-                     <div className='rap-phim'>
-                        <p className='text-wrap'>{ele.tenCumRap}</p>
-                        <img
-                           src={ele.hinhAnh}
-                           className='logo'
-                        />
-                     </div>
-                  </TabPanel>
-               </TabPanels>
-            );
-         });
-      });
-   };
-
-   let renderRapFilm = () => {
-      return rapFilm.map((item) => {
-         return (
-            <Tab key={item.maHeThongRap}>
-               <img
-                  onClick={() => {
-                     getLichChieuHeThongRap(item.maHeThongRap);
-                  }}
-                  src={item.logo}
-                  className='logo'
-               />
-            </Tab>
-         );
-      });
-   };
-
+   
    let renderFilmList = () => {
       return film.map((item) => {
          return (
             <SwiperSlide key={item.maPhim}>
                <CardFilm
                   col={12}
-                  key={item.maPhim}
                   item={item}
                />
             </SwiperSlide>
          );
       });
    };
+
+   let renderRapFilm = () => {
+      return rapFilm.map((item) => {
+         let isFirst = rapFilm.indexOf(item) === 0;
+         return (
+            <a
+               key={item.maHeThongRap}
+               className={
+                  isFirst
+                     ? 'list-group-item list-group-item-action active'
+                     : 'list-group-item list-group-item-action'
+               }
+               data-toggle='list'
+               onClick={() => {
+                  getLichChieuHeThongRap(item.maHeThongRap);
+               }}
+            >
+               <img
+                  className='img-fluid logo'
+                  src={item.logo}
+               />
+            </a>
+         );
+      });
+   };
+
+   let renderCumRap = () => {
+      if (lichChieuHeThongRap.length > 0) {
+         let heThongRap = lichChieuHeThongRap[0].lstCumRap;
+         return heThongRap.map((item) => {
+            let isFirst = heThongRap.indexOf(item) === 0;
+            return (
+               <a
+                  key={item.tenCumRap}
+                  className={
+                     isFirst
+                        ? 'list-group-item list-group-item-action active'
+                        : 'list-group-item list-group-item-action'
+                  }
+                  data-toggle='list'
+                  href={`#${item.tenCumRap}`}
+                  role='tab'
+               >
+                  <img
+                     src={item.hinhAnh}
+                     className='card-img-top img-fluid'
+                  />
+                  <div className='card-body text-center'>
+                     <h5 className='card-title'>{item.tenCumRap}</h5>
+                     <p className='card-text'>{item.diaChi}</p>
+                  </div>
+               </a>
+            );
+         });
+      }
+   };
+
+   // let renderLichChieuTheoCum = () => {
+   //    if (lichChieuHeThongRap.length > 0) {
+   //       let heThongRap = lichChieuHeThongRap[0].lstCumRap;
+   //       return heThongRap.map((item) => {
+   //          console.log(item);
+   //          let isFirst = heThongRap.indexOf(item) === 0;
+   //          return (
+   //             <div
+   //                class='tab-pane active'
+   //                id={item.tenCumRap}
+   //                role='tabpanel'
+   //             >
+   //                {item.danhSachPhim.map((item) => {
+   //                   return <p>{item.tenPhim}</p>;
+   //                })}
+   //             </div>
+   //          );
+   //       });
+   //    }
+   // };
 
    return (
       <div className='home'>
@@ -121,13 +156,35 @@ const Home = () => {
          </div>
          <div className='container'>
             <h2 className='title h2 mt-3'>Danh Sách Cụm Rạp</h2>
-            <Tabs>
-               <TabList>{renderRapFilm()}</TabList>
-               <div className='row'>
-                  <div className='col-3 text-center'>{renderCumRap()}</div>
-                  <div className='col-9'></div>
+            <div className='row'>
+               <div className='col-3'>
+                  <div
+                     className='list-group'
+                     id='list-tab'
+                     role='tablist'
+                  >
+                     {renderRapFilm()}
+                  </div>
                </div>
-            </Tabs>
+               <div className='col-9'>
+                  <div className='row'>
+                     <div className='col-3'>
+                        <div
+                           className='list-group'
+                           id='listRap'
+                           role='tablist'
+                        >
+                           {renderCumRap()}
+                        </div>
+                     </div>
+                     <div className='col-9'>
+                        <div className='tab-content'>
+                           {/* {renderLichChieuTheoCum()} */}
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
          </div>
       </div>
    );
