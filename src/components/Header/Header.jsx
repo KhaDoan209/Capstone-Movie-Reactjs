@@ -48,6 +48,14 @@ const Header = () => {
                            Showing Movies
                         </NavLink>
                      </li>
+                     <li className='nav-item'>
+                        <NavLink
+                           className='nav-link'
+                           to='/admin-film'
+                        >
+                           Quản lý phim
+                        </NavLink>
+                     </li>
                   </ul>
                </div>
             </nav>
