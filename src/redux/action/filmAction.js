@@ -1,6 +1,7 @@
 import { apiMethod } from '../../services/apiMethod';
 import { GET_BANNER_LIST, GET_FILM_LIST, SET_CHI_TIET_PHIM, SET_CHI_TIET_PHONG_VE } from '../types/filmTypes';
 import { filmService } from '../../services/filmService';
+import {ThongTinDatVe} from '../../_core/models/ThongTinDatVe'
 export const getFilmListAction = () => {
    return async (dispatch) => {
       try {
@@ -57,6 +58,17 @@ export const layChiTietPhongVeAction = (maLichChieu) => {
                chiTietPhongVe: result.data.content
             })
          }
+      } catch (error) {
+         console.log(error);
+      }
+   }
+}
+
+export const datVeAction = (thongTinDatVe = new ThongTinDatVe()) => {
+   return async dispatch => {
+      try {
+         let result = await apiMethod.post(`QuanLyDatVe/DatVe`,thongTinDatVe);
+         console.log(result.data.content)
       } catch (error) {
          console.log(error);
       }

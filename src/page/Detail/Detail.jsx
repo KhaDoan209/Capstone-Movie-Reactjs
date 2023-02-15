@@ -25,7 +25,7 @@ const Detail = (props) => {
 
         dispatch(layThongTinChiTietPhim(id))
     }, [])
-    
+
     return (
         <div className='container'>
             <div className='row'>
@@ -41,8 +41,8 @@ const Detail = (props) => {
                 </div>
                 <div className='col-4 danhgia'>
                     <p>Đánh giá</p>
-                    <Rate disabled defaultValue={(filmDetail.danhGia)/2} />
-                    <div className={`c100 p${filmDetail.danhGia*10} big`}>
+                    <Rate disabled defaultValue={(filmDetail.danhGia) / 2} />
+                    <div className={`c100 p${filmDetail.danhGia * 10} big`}>
                         <span>{filmDetail.danhGia * 10}%</span>
                         <div className="slice">
                             <div className="bar" />
@@ -54,6 +54,7 @@ const Detail = (props) => {
             </div>
 
             <Tabs defaultActiveKey='1' centered className='mt-5'>
+
                 <TabPane tab="Lịch Chiếu" key="1" style={{ minHeight: 300 }}>
                     <Tabs className='mt-5 px-5 py-5' tabPosition={'left'}>
                         {filmDetail.heThongRapChieu?.map((htr, i) => {
@@ -69,12 +70,12 @@ const Detail = (props) => {
                                                 </div>
                                             </div>
                                             <div className='thong-tin-lich-chieu row row-cols-4 mt-2'>
-                                                {cumRap.lichChieuPhim?.map((lichChieu,i) => {
-                                                return <NavLink to={`/ticketroom/${lichChieu.maLichChieu}`} key={i} className="col text-success">
-                                                    {moment(lichChieu.ngayChieuGioChieu).format('hh:mm A')}
-                                                </NavLink>
+                                                {cumRap.lichChieuPhim?.map((lichChieu, i) => {
+                                                    return <NavLink to={`/ticketroom/${lichChieu.maLichChieu}`} key={i} className="col text-success">
+                                                        {moment(lichChieu.ngayChieuGioChieu).format('hh:mm A')}
+                                                    </NavLink>
                                                 })}
-                                                
+
                                             </div>
                                         </div>
 
@@ -84,12 +85,15 @@ const Detail = (props) => {
                         })}
                     </Tabs>
                 </TabPane>
+                
                 <TabPane tab="Thông Tin" key="2">
                     2
                 </TabPane>
+                
                 <TabPane tab="Đánh Gía" key="3">
                     3
                 </TabPane>
+            
             </Tabs>
 
 
