@@ -4,8 +4,14 @@ import { createBrowserHistory } from 'history';
 import { HomeTemplate } from './template/HomeTemplate';
 import ShowingMovies from './page/ShowingMovies/ShowingMovies';
 import Home from './page/Home/Home';
-import { AdminTemplate } from './template/AdminTemplate';
 import AdminFilm from './page/Admin/AdminFilm';
+import Login from './page/Login/Login';
+import Register from './page/Register/Register';
+import Header from './components/Header';
+
+import Admin from './page/Admin/Admin';
+import { FormTemplate } from './template/FormTemplate';
+
 
 export const history = createBrowserHistory();
 function App() {
@@ -20,14 +26,17 @@ function App() {
                path='/showing-movie'
                component={ShowingMovies}
             />
-            <AdminTemplate
-               path='/admin-film'
-               component={AdminFilm}
-            />
+             <FormTemplate  path='/login'
+               component={Login}/>
+                <FormTemplate  path='/registers'
+               component={Register}/>
+           
             <HomeTemplate
                path='/'
                component={Home}
             />
+            
+           
          </Switch>
       </Router>
    );
