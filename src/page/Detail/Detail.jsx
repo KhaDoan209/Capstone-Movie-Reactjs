@@ -30,9 +30,7 @@ const Detail = (props) => {
         <div className='container'>
             <div className='row'>
                 <div className='col-4'>
-                    <img style={{
-                        width: "100%", height: "100%"
-                    }} src={filmDetail.hinhAnh} style={{ width: '100%', height: 450 }} alt="123" />
+                    <img src={filmDetail.hinhAnh} style={{ width: '100%', height: 450 }} alt="123" />
                 </div>
                 <div className='col-4'>
                     <p>Ngày Khởi Chiếu : {moment(filmDetail.ngayKhoiChieu).format('DD-MM-YYYY')}</p>
