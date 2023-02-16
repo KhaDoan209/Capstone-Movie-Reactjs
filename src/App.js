@@ -2,16 +2,13 @@ import './App.css';
 import { Router, Switch } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 import { HomeTemplate } from './template/HomeTemplate';
+import   {FormTemplate} from './template/FormTemplate'
 import ShowingMovies from './page/ShowingMovies/ShowingMovies';
 import Home from './page/Home/Home';
-import AdminFilm from './page/Admin/AdminFilm';
+import Detail from './page/Detail/Detail';
+import TicketRoom from './page/TicketRoom/TicketRoom';
 import Login from './page/Login/Login';
 import Register from './page/Register/Register';
-import Header from './components/Header';
-
-import Admin from './page/Admin/Admin';
-import { FormTemplate } from './template/FormTemplate';
-
 
 export const history = createBrowserHistory();
 function App() {
@@ -26,6 +23,10 @@ function App() {
                path='/showing-movie'
                component={ShowingMovies}
             />
+            <HomeTemplate path="/detail/:id" component={Detail} />
+
+            <HomeTemplate path="/ticketroom/:id" component={TicketRoom} />
+
              <FormTemplate  path='/login'
                component={Login}/>
                 <FormTemplate  path='/registers'
@@ -35,8 +36,6 @@ function App() {
                path='/'
                component={Home}
             />
-            
-           
          </Switch>
       </Router>
    );
