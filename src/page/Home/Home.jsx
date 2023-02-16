@@ -41,7 +41,7 @@ const Home = () => {
    let getLichChieuHeThongRap = (maHeThongRap) => {
       dispatch(getLichChieuHeThongRapAction(`${maHeThongRap}`));
    };
-   
+
    let renderFilmList = () => {
       return film.map((item) => {
          return (
@@ -84,15 +84,10 @@ const Home = () => {
       if (lichChieuHeThongRap.length > 0) {
          let heThongRap = lichChieuHeThongRap[0].lstCumRap;
          return heThongRap.map((item) => {
-            let isFirst = heThongRap.indexOf(item) === 0;
             return (
-               <a
+               <div
                   key={item.tenCumRap}
-                  className={
-                     isFirst
-                        ? 'list-group-item list-group-item-action active'
-                        : 'list-group-item list-group-item-action'
-                  }
+                  className='col-3'
                   data-toggle='list'
                   href={`#${item.tenCumRap}`}
                   role='tab'
@@ -105,7 +100,7 @@ const Home = () => {
                      <h5 className='card-title'>{item.tenCumRap}</h5>
                      <p className='card-text'>{item.diaChi}</p>
                   </div>
-               </a>
+               </div>
             );
          });
       }
@@ -167,21 +162,12 @@ const Home = () => {
                   </div>
                </div>
                <div className='col-9'>
-                  <div className='row'>
-                     <div className='col-3'>
-                        <div
-                           className='list-group'
-                           id='listRap'
-                           role='tablist'
-                        >
-                           {renderCumRap()}
-                        </div>
-                     </div>
-                     <div className='col-9'>
-                        <div className='tab-content'>
-                           {/* {renderLichChieuTheoCum()} */}
-                        </div>
-                     </div>
+                  <div
+                     className='row'
+                     id='listRap'
+                     role='tablist'
+                  >
+                     {renderCumRap()}
                   </div>
                </div>
             </div>
