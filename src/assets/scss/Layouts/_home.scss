@@ -7,4 +7,15 @@
    .swiper-pagination-bullets.swiper-pagination-horizontal {
       position: relative;
    }
+   .rap-phim {
+      border-radius: 8px;
+      padding: 10px 20px;
+      transition: all 0.3s;
+      box-shadow: $bx-shadow;
+
+      &:hover {
+         cursor: pointer;
+         box-shadow: $bs-shadow-3;
+      }
+   }
 }

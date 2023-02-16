@@ -10,7 +10,6 @@ export const filmReducer = (state = initialState, action) => {
          state.filmList = action.filmList;
          return { ...state };
       case GET_BANNER_LIST:
-         console.log(action);
          state.filmBanner = action.bannerList;
          return { ...state };
       default:

@@ -3,13 +3,16 @@ import thunk from 'redux-thunk';
 import { filmReducer } from './reducers/filmReducer';
 import { QuanLyDatVeReducer } from './reducers/QLDatVeReducer';
 import { QuanLyPhimReducer } from './reducers/QuanLyPhimReducer';
+import { quanLyNguoiDungReducer } from './reducers/quanLyNguoiDungReducer';
+import { rapPhimReducer } from './reducers/rapPhimReducer';
 
 
 const rootReducer = combineReducers({
    filmReducer,
    QuanLyPhimReducer,
    QuanLyDatVeReducer,
-
-});
+   rapPhimReducer,
+   quanLyNguoiDungReducer,
+})
 
 export const store = createStore(rootReducer, applyMiddleware(thunk));

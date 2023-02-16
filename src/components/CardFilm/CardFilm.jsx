@@ -5,7 +5,7 @@ import { history } from '../../App';
 const CardFilm = (props) => {
    return (
       <>
-         <div className='my-3 card-film col-12'>
+         <div className={`my-3 card-film col-${props.col}`}>
             <img
                className='img-fluid'
                src={props.item.hinhAnh}
