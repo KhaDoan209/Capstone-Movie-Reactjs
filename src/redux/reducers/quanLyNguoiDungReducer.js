@@ -16,7 +16,6 @@ export const quanLyNguoiDungReducer = (state = initialState, action) => {
       state.useLogin = action.userLogin
       return { ...state }
     case "DANG_XUAT":
-      console.log(action.us)
       state.useLogin = action.usLogin
       localStorage.removeItem(userMovie);
       return { ...state }

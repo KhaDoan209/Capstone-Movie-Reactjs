@@ -1,3 +1,4 @@
+@import '../Helpers/variable.scss';
 header {
    background-color: rgba(250, 250, 250, 0.901);
    width: 100%;
@@ -30,5 +31,45 @@ header {
             }
          }
       }
+   }
+}
+
+.admin-nav {
+   .list-group-item {
+      color: $-white-1;
+      background: none;
+      border: none;
+      font-weight: 600;
+      font-style: 18px;
+      line-height: 28px;
+      margin: auto 0;
+      width: 100%;
+      &:hover {
+         background: none;
+         border-bottom: 2px solid $-white-1;
+         border-radius: 0px;
+      }
+   }
+   .list-group-item.active {
+      color: $-white-1;
+      background: none;
+      border-radius: 0px;
+      border-bottom: 2px solid $-white-1;
+   }
+}
+.admin-navigation {
+   .menu-col-2 {
+      background: $-blue-2;
+      height: 100vh;
+      border-right: 2px solid $-grey-1;
+      border-radius: 8px;
+   }
+   nav {
+      background: $-blue-2;
+      border-radius: $-br-2;
+      .header {
+         width: 90%;
+      }
+      display: block !important;
    }
 }

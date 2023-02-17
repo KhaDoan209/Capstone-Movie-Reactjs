@@ -39,4 +39,4 @@ export class APIMethod2 {
    }
 
 }
-export const apiMethod2 = new APIMethod2();
+export const apiMethod = new APIMethod2();
