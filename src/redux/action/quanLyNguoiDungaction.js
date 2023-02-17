@@ -1,7 +1,8 @@
 import axios from "axios";
 import { ACCESS_TOKEN, userMovie } from "../../settings/settings";
-import { DANG_NHAP } from "../types/quanLyNguoiDungType";
+import { DANG_NHAP, SET_THONG_TIN_NGUOI_DUNG } from "../types/quanLyNguoiDungType";
 import { history } from "../../App";
+import {apiMethod2} from '../../services/apiMethod2'
 export const dangkyAction = (thongTinND) => {
 
     return (dispatch2) => {
@@ -59,3 +60,20 @@ export const dangnhapAction = (thongTinLogin) => {
         })
     }
 }
+
+export const layThongTinNguoiDungAction = () => {
+    return async dispatch => {
+       try {
+          let result = await apiMethod2.post(`QuanLyNguoiDung/ThongTinTaiKhoan`);
+           console.log("result", result)
+          if (result.status === 200) {
+             dispatch({
+                type: SET_THONG_TIN_NGUOI_DUNG,
+                thongTinNguoiDung : result.data.content
+             })
+          }
+       } catch (error) {
+          console.log(error);
+       }
+    }
+ }

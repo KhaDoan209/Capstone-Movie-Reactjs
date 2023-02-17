@@ -2,13 +2,17 @@ import React, { Fragment } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import './TicketRoom.css';
+import _ from 'lodash';
 import { datVeAction, layChiTietPhongVeAction } from '../../redux/action/filmAction';
 import { CloseOutlined, UserAddOutlined, CheckOutlined } from '@ant-design/icons';
+import { Tabs } from 'antd';
 import { DAT_VE } from '../../redux/types/filmTypes';
 import { ThongTinDatVe } from '../../_core/models/ThongTinDatVe';
+import { layThongTinNguoiDungAction } from '../../redux/action/quanLyNguoiDungaction';
+import moment from 'moment';
 
 const TicketRoom = (props) => {
-    const {userLogin} = useSelector(state => state.quanLyNguoiDungReducer);
+    const { userLogin } = useSelector(state => state.quanLyNguoiDungReducer);
     const { chiTietPhongVe, danhSachGheDangDat } = useSelector(state => state.QuanLyDatVeReducer);
 
     const dispatch = useDispatch();
@@ -143,4 +147,77 @@ const TicketRoom = (props) => {
     );
 }
 
-export default TicketRoom;
+const KQDatVe = (props) => {
+    const dispatch = useDispatch();
+
+    const { userLogin } = useSelector(state => state.quanLyNguoiDungReducer);
+    const { thongTinNguoiDung } = useSelector(state => state.quanLyNguoiDungReducer);
+    useEffect(() => {
+        const action = layThongTinNguoiDungAction()
+        dispatch(action)
+    }, []);
+    console.log({ thongTinNguoiDung });
+
+    const renderTicketItem = () => {
+        return thongTinNguoiDung.thongTinDatVe?.map((ticket, i) => {
+            return <div className="col-xl-3 col-sm-6 mb-5" key={i}>
+                <div className="bg-white rounded shadow-sm py-5 px-4"><img src={ticket.hinhAnh} alt="123" className="img-fluid mb-3 img-thumbnail shadow-sm" />
+                    <h5 className="mb-0">{ticket.tenPhim}</h5>
+                    <span className="small text-uppercase text-muted">{moment(ticket.ngayDat).format('hh:mm A - DD-MM-YYYY')}</span>
+                    <p className="mt-2 small text-uppercase ">Địa điểm: {_.first(ticket.danhSachGhe).tenHeThongRap} - {_.first(ticket.danhSachGhe).tenCumRap}</p>
+                    <p className="mt-2 small text-uppercase text-muted">Ghế {ticket.danhSachGhe.map((ghe, i) => {
+                        return <span key={i} className="mr-2" >{ghe.tenGhe}</span>
+                    })}</p>
+                </div>
+            </div>
+        })
+    }
+
+    return (
+
+        <div className="container py-5">
+            <div className="row mb-4">
+                <div className="col-lg-5">
+                    <h2 className="display-4 font-weight-light">Our team</h2>
+                    <p className="font-italic text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                </div>
+            </div>
+            <div className="row text-center">
+                {/* Team item*/}
+                {renderTicketItem()}
+                {/* End*/}
+
+            </div>
+        </div>
+
+
+
+    )
+}
+
+
+const Tab_Booking = (props) => {
+    return (
+        <Tabs className='m-5'
+            defaultActiveKey="1"
+            items={[
+                {
+                    label: '01 CHỌN GHẾ & THANH TOÁN',
+                    key: '1',
+                    children: (<div>
+                        <TicketRoom {...props} />
+                    </div>),
+                },
+                {
+                    label: '02 KẾT QUẢ ĐẶT VÉ',
+                    key: '2',
+                    children: (<div>
+                        <KQDatVe {...props} />
+                    </div>),
+                },
+            ]}
+        />
+    )
+}
+
+export default Tab_Booking;

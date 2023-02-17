@@ -1,33 +1,30 @@
 import { userMovie,ACCESS_TOKEN } from "../../settings/settings"
-import { DANG_NHAP } from "../types/quanLyNguoiDungType"
+import { DANG_NHAP, SET_THONG_TIN_NGUOI_DUNG } from "../types/quanLyNguoiDungType"
 
 let userLogin = null
 if (localStorage.getItem(userMovie)) {
   userLogin = JSON.parse(localStorage.getItem(userMovie))
 }
-let access_Token = ''
- if (localStorage.getItem(ACCESS_TOKEN)) {
-    access_Token = localStorage.getItem(ACCESS_TOKEN);
- }
-
- console.log("access token",access_Token);
-
 const initialState = {
-  userLogin: userLogin
+  userLogin: userLogin,
+  thongTinNguoiDung:{}
 }
 export const quanLyNguoiDungReducer = (state = initialState, action) => {
   switch (action.type) {
 
     case DANG_NHAP:
       // console.log(action.userLogin)
-      state.useLogin = action.userLogin
+      state.userLogin = action.userLogin
       return { ...state }
     case "DANG_XUAT":
       console.log(action.us)
-      state.useLogin = action.usLogin
+      state.userLogin = action.usLogin
       localStorage.removeItem(userMovie);
       return { ...state }
-
+    case SET_THONG_TIN_NGUOI_DUNG: {
+      state.thongTinNguoiDung = action.thongTinNguoiDung
+      return {...state}
+    }
     default:
       return state
   }
