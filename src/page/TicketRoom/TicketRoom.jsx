@@ -8,7 +8,7 @@ import { DAT_VE } from '../../redux/types/filmTypes';
 import { ThongTinDatVe } from '../../_core/models/ThongTinDatVe';
 
 const TicketRoom = (props) => {
-    // const {userLogin} = useSelector (state => state.QuanLyNguoiDungReducer)
+    const {userLogin} = useSelector(state => state.quanLyNguoiDungReducer);
     const { chiTietPhongVe, danhSachGheDangDat } = useSelector(state => state.QuanLyDatVeReducer);
 
     const dispatch = useDispatch();
@@ -31,9 +31,9 @@ const TicketRoom = (props) => {
             let indexGheDD = danhSachGheDangDat.findIndex(gheDD => gheDD.maGhe === ghe.maGhe);
 
             let classGheDaDuocDat = "";
-            // if (userLogin.taiKhoan === ghe.taiKhoanNguoiDat) {
-            //     classGheDaDuocDat = 'gheDaDuocDat';
-            // }
+            if (userLogin.taiKhoan === ghe.taiKhoanNguoiDat) {
+                classGheDaDuocDat = 'gheDaDuocDat';
+            }
 
             if (indexGheDD != -1) {
                 classGheDaDat = 'gheDangDat'
@@ -116,11 +116,11 @@ const TicketRoom = (props) => {
                     <hr />
                     <div className='my-3'>
                         <i>Email</i> <br />
-                        {/* {userLogin.email} */}
+                        {userLogin.email}
                     </div>
                     <div className='my-3'>
                         <i>Phone</i> <br />
-                        {/* {userLogin.soDT} */}
+                        {userLogin.soDT}
 
                     </div>
                     <hr />

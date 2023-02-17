@@ -1,12 +1,19 @@
-import { userMovie } from "../../utils/setting"
+import { userMovie,ACCESS_TOKEN } from "../../settings/settings"
 import { DANG_NHAP } from "../types/quanLyNguoiDungType"
 
 let userLogin = null
 if (localStorage.getItem(userMovie)) {
   userLogin = JSON.parse(localStorage.getItem(userMovie))
 }
+let access_Token = ''
+ if (localStorage.getItem(ACCESS_TOKEN)) {
+    access_Token = localStorage.getItem(ACCESS_TOKEN);
+ }
+
+ console.log("access token",access_Token);
+
 const initialState = {
-  useLogin: userLogin
+  userLogin: userLogin
 }
 export const quanLyNguoiDungReducer = (state = initialState, action) => {
   switch (action.type) {

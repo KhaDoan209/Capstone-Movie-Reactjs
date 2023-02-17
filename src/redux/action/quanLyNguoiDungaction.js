@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ACCESS_TOKEN, userMovie } from "../../utils/setting";
+import { ACCESS_TOKEN, userMovie } from "../../settings/settings";
 import { DANG_NHAP } from "../types/quanLyNguoiDungType";
 import { history } from "../../App";
 export const dangkyAction = (thongTinND) => {
@@ -40,6 +40,7 @@ export const dangnhapAction = (thongTinLogin) => {
             //đăng nhập thành công
             alert("Đăng nhập thành công");
             //lưu dữ liệu đăng nhập xuông localstorage
+            
             localStorage.setItem(ACCESS_TOKEN, result.data.content.accessToken);
             let userJSON = JSON.stringify(result.data.content)
             localStorage.setItem(userMovie, userJSON);

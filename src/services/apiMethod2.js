@@ -1,6 +1,12 @@
 import { API_URL } from '../settings/settings';
-import { TOKEN_CYBER,ACCESS_TOKEN } from '../settings/settings';
 import axios from 'axios';
+import { TOKEN_CYBER,ACCESS_TOKEN } from '../settings/settings';
+
+ let access_Token = ''
+ if (localStorage.getItem(ACCESS_TOKEN)) {
+    access_Token = localStorage.getItem(ACCESS_TOKEN);
+ }
+
 export class APIMethod2 {
     get = (url) => {
         return axios({
@@ -20,7 +26,7 @@ export class APIMethod2 {
          maNhom: 'GP01',
          data: model,
          headers: {
-            Authorization : 'Bearer ' + ACCESS_TOKEN,
+            Authorization : 'Bearer ' + access_Token,
             TokenCybersoft: TOKEN_CYBER,
          },
       });

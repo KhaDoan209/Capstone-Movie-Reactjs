@@ -7,6 +7,7 @@ import { layThongTinChiTietPhim } from '../../redux/action/filmAction'
 import moment from 'moment/moment';
 import { NavLink } from 'react-router-dom';
 
+
 const { TabPane } = Tabs;
 
 const Detail = (props) => {
