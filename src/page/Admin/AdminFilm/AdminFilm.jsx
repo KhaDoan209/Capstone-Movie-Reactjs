@@ -10,7 +10,7 @@ import { history } from '../../../App';
 const { Search } = Input;
 
 const AdminFilm = (props) => {
-   console.log(props);
+   console.log(props.match);
    const dispatch = useDispatch();
    const film = useSelector((state) => state.filmReducer.filmList);
    const columns = [
@@ -115,7 +115,7 @@ const AdminFilm = (props) => {
          <Button
             className='mt-3'
             onClick={() => {
-               history.push('/admin-film/create-film');
+               history.push('/create-film');
             }}
          >
             Thêm Phim

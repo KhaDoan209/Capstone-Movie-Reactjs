@@ -2,6 +2,9 @@ import { Route } from 'react-router-dom';
 import Header from '../components/Header/Header';
 
 export const HomeTemplate = (props) => {
+   const { component, ...restProps } = props;
+   console.log(props);
+
    return (
       <Route
          exact

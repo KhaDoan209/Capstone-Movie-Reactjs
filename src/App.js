@@ -55,7 +55,7 @@ function App() {
                component={AdminFilm}
             />
             <AdminTemplate
-               path='/admin-film/create-film'
+               path='/create-film'
                component={CreateFilm}
             />
             <HomeTemplate

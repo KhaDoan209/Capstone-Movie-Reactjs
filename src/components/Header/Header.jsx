@@ -7,42 +7,41 @@ const Header = () => {
    const useLogin = useSelector(
       (state) => state.quanLyNguoiDungReducer.useLogin
    );
-   console.log(useLogin);
 
-   const renderHeaderByRole = () => {
-      if (useLogin.maLoaiNguoiDung === 'KhachHang') {
-         return (
-            <>
-               <li className='nav-item'>
-                  <p className='nav-link text-dark text-muted'>
-                     Hello {useLogin != null ? useLogin.taiKhoan : ''}
-                  </p>
-               </li>
-            </>
-         );
-      } else {
-         return (
-            <>
-               <li className='nav-item'>
-                  <NavLink
-                     className='nav-link'
-                     to='/admin-film'
-                  >
-                     Quản lý phim
-                  </NavLink>
-               </li>
-               <li className='nav-item'>
-                  <NavLink
-                     className='nav-link'
-                     to='/admin-film'
-                  >
-                     Quản lý user
-                  </NavLink>
-               </li>
-            </>
-         );
-      }
-   };
+   // const renderHeaderByRole = () => {
+   //    if (useLogin.maLoaiNguoiDung === 'KhachHang') {
+   //       return (
+   //          <>
+   //             <li className='nav-item'>
+   //                <p className='nav-link text-dark text-muted'>
+   //                   Hello {useLogin != null ? useLogin.taiKhoan : ''}
+   //                </p>
+   //             </li>
+   //          </>
+   //       );
+   //    } else {
+   //       return (
+   //          <>
+   //             <li className='nav-item'>
+   //                <NavLink
+   //                   className='nav-link'
+   //                   to='/admin-film'
+   //                >
+   //                   Quản lý phim
+   //                </NavLink>
+   //             </li>
+   //             <li className='nav-item'>
+   //                <NavLink
+   //                   className='nav-link'
+   //                   to='/admin-film'
+   //                >
+   //                   Quản lý user
+   //                </NavLink>
+   //             </li>
+   //          </>
+   //       );
+   //    }
+   // };
    const renderLogin = () => {
       if (useLogin !== null) {
          return (
@@ -52,7 +51,15 @@ const Header = () => {
                      Hello {useLogin != null ? useLogin.taiKhoan : ''}
                   </p>
                </li>
-               {renderHeaderByRole}
+               <li className='nav-item'>
+                  <NavLink
+                     className='nav-link'
+                     to='/admin-film'
+                  >
+                     Quản lý phim
+                  </NavLink>
+               </li>
+               {/* {renderHeaderByRole} */}
                <li className='nav-item'>
                   <button
                      className='btn btn-danger'
