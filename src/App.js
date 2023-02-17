@@ -10,8 +10,9 @@ import TicketRoom from './page/TicketRoom/TicketRoom';
 import Login from './page/Login/Login';
 import Register from './page/Register/Register';
 import AdminTemplate from './template/AdminTemplate';
-import AdminUser from './page/Admin/AdminUser';
-import AdminFilm from './page/Admin/AdminFilm';
+import AdminFilm from './page/Admin/AdminFilm/AdminFilm';
+import AdminUser from './page/Admin/AdminUser/AdminUser';
+import CreateFilm from './page/Admin/AdminFilm/CreateFilm';
 
 export const history = createBrowserHistory();
 function App() {
@@ -52,6 +53,10 @@ function App() {
             <AdminTemplate
                path='/admin-film'
                component={AdminFilm}
+            />
+            <AdminTemplate
+               path='/admin-film/create-film'
+               component={CreateFilm}
             />
             <HomeTemplate
                path='/'

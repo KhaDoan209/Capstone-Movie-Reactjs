@@ -4,23 +4,25 @@ import { useDispatch, useSelector } from 'react-redux';
 import logo from '../../assets/img/logo.png';
 const Header = () => {
    const dispatch = useDispatch();
-   const useLogin = useSelector((state) => state.quanLyNguoiDungReducer);
+   const useLogin = useSelector(
+      (state) => state.quanLyNguoiDungReducer.useLogin
+   );
    console.log(useLogin);
-   const renderLogin = () => {
-      if (useLogin !== null) {
+
+   const renderHeaderByRole = () => {
+      if (useLogin.maLoaiNguoiDung === 'KhachHang') {
          return (
             <>
-               <p className='text-dark'>
-                  {useLogin != null ? useLogin.taiKhoan : ''}
-               </p>
                <li className='nav-item'>
-                  <NavLink
-                     className='nav-link'
-                     to='/showing-movie'
-                  >
-                     Showing Movies
-                  </NavLink>
+                  <p className='nav-link text-dark text-muted'>
+                     Hello {useLogin != null ? useLogin.taiKhoan : ''}
+                  </p>
                </li>
+            </>
+         );
+      } else {
+         return (
+            <>
                <li className='nav-item'>
                   <NavLink
                      className='nav-link'
@@ -29,6 +31,28 @@ const Header = () => {
                      Quản lý phim
                   </NavLink>
                </li>
+               <li className='nav-item'>
+                  <NavLink
+                     className='nav-link'
+                     to='/admin-film'
+                  >
+                     Quản lý user
+                  </NavLink>
+               </li>
+            </>
+         );
+      }
+   };
+   const renderLogin = () => {
+      if (useLogin !== null) {
+         return (
+            <>
+               <li className='nav-item'>
+                  <p className='nav-link text-dark text-muted'>
+                     Hello {useLogin != null ? useLogin.taiKhoan : ''}
+                  </p>
+               </li>
+               {renderHeaderByRole}
                <li className='nav-item'>
                   <button
                      className='btn btn-danger'
@@ -45,8 +69,7 @@ const Header = () => {
                </li>
             </>
          );
-      } else if (useLogin == null) {
-         console.log('null ne');
+      } else {
          return (
             <>
                <button>
@@ -62,16 +85,16 @@ const Header = () => {
                      className='nav-link'
                      to='/login'
                   >
-                     login
+                     Login
                   </NavLink>
                </button>
             </>
          );
       }
    };
+
    return (
       <header className='header'>
-         {console.log('render')}
          <div className='container'>
             <nav className='navbar navbar-expand-lg navbar-light d-flex justify-content-between p-0'>
                <a

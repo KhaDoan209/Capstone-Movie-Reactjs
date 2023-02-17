@@ -32,9 +32,7 @@ export const AdminTemplate = (props) => {
                                     >
                                        <div className='d-flex align-items-center px-3 pb-2'>
                                           <i className='fa-solid fa-user'></i>
-                                          <p className='ml-2'>
-                                             User Management
-                                          </p>
+                                          <p className='ml-2'>User</p>
                                        </div>
                                     </NavLink>
                                     <div className='my-2'></div>
@@ -46,9 +44,7 @@ export const AdminTemplate = (props) => {
                                     >
                                        <div className='d-flex align-items-center px-3 pb-2'>
                                           <i className='fa-solid fa-film'></i>
-                                          <p className='ml-2'>
-                                             Film Management
-                                          </p>
+                                          <p className='ml-2'>Film</p>
                                        </div>
                                     </NavLink>
                                  </div>
@@ -60,7 +56,7 @@ export const AdminTemplate = (props) => {
                         <nav className='navbar navbar-light py-4'>
                            <div className='header d-flex justify-content-between mx-auto text-white'>
                               <p className='title-2'>Hello, username</p>
-                              <i class='fa-solid fa-right-from-bracket'></i>
+                              <i className='fa-solid fa-right-from-bracket'></i>
                            </div>
                         </nav>
                         <props.component {...propsRoute} />
