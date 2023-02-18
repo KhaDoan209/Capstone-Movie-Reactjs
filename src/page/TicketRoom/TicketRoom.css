@@ -43,9 +43,15 @@
   border: 1px solid orange;
 }
 
+.gheKhachDat {
+  background-color: rgb(134, 123, 199);
+  cursor: no-drop;
+}
+
 .cursor-pointer {
   cursor: pointer;
 }
+
 .sizexxl {
   font-size: 50px;
   color: #fff;

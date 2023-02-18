@@ -77,11 +77,13 @@ const TicketRoom = (props) => {
                         <table>
                             <thead>
                                 <tr>
-                                    <th className='pl-3 text-center'>Ghế chưa đặt</th>
-                                    <th className='pl-3 text-center'>Ghế đang đặt</th>
-                                    <th className='pl-3 text-center'>Ghế Vip</th>
-                                    <th className='pl-3 text-center'>Ghế đã đặt</th>
-                                    <th className='pl-3 text-center'>Ghế Bạn dã đặt</th>
+                                    <th className='pl-4 text-center'>Ghế chưa đặt</th>
+                                    <th className='pl-4 text-center'>Ghế đang đặt</th>
+                                    <th className='pl-4 text-center'>Ghế Vip</th>
+                                    <th className='pl-4 text-center'>Ghế đã đặt</th>
+                                    <th className='pl-4 text-center'>Ghế Bạn đã đặt</th>
+                                    <th className='pl-4 text-center'>Ghế khách đang đặt</th>
+
                                 </tr>
                             </thead>
                             <tbody>
@@ -91,6 +93,8 @@ const TicketRoom = (props) => {
                                     <td className='text-center'><button className='ghe gheVip'><CheckOutlined /></button></td>
                                     <td className='text-center'><button className='ghe gheDaDat'><CheckOutlined /></button></td>
                                     <td className='text-center'><button className='ghe gheDaDuocDat'><CheckOutlined /></button></td>
+                                    <td className='text-center'><button className='ghe gheKhachDat'><CheckOutlined /></button></td>
+
                                 </tr>
                             </tbody>
                         </table>
