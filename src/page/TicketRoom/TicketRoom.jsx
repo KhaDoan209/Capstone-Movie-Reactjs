@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import './TicketRoom.css';
@@ -10,6 +10,7 @@ import { DAT_VE } from '../../redux/types/filmTypes';
 import { ThongTinDatVe } from '../../_core/models/ThongTinDatVe';
 import { layThongTinNguoiDungAction } from '../../redux/action/quanLyNguoiDungaction';
 import moment from 'moment';
+import { number } from 'yup';
 
 const TicketRoom = (props) => {
     const { userLogin } = useSelector(state => state.quanLyNguoiDungReducer);
@@ -107,7 +108,7 @@ const TicketRoom = (props) => {
                     <div className="row my-3">
                         <div className='col-8'>
                             <span className='text-danger'>Ghế:</span>
-                            {(danhSachGheDangDat).map((gheDD, i) => {
+                            {_.sortBy(danhSachGheDangDat,['stt']).map((gheDD, i) => {
                                 return <span key={i} className="text-success ml-2"> {gheDD.stt}</span>
                             })}
                         </div>
@@ -137,6 +138,7 @@ const TicketRoom = (props) => {
 
                             //Truyen vao thong tin dat ve 
                             dispatch(datVeAction(thongTinDatVe));
+
                         }} className='bg-success w-100 text-center text-white p-2 cursor-pointer'>
                             Đặt Vé
                         </div>
@@ -160,12 +162,12 @@ const KQDatVe = (props) => {
 
     const renderTicketItem = () => {
         return thongTinNguoiDung.thongTinDatVe?.map((ticket, i) => {
-            return <div className="col-xl-3 col-sm-6 mb-5" key={i}>
-                <div className="bg-white rounded shadow-sm py-5 px-4"><img src={ticket.hinhAnh} alt="123" className="img-fluid mb-3 img-thumbnail shadow-sm" />
+            return <div className="col-xl-3 col-sm-6 mb-5 shadow-lg" key={i}>
+                <div className="bg-white rounded py-5 px-4"><img src={ticket.hinhAnh} alt="123" className="img-fluid mb-3 img-thumbnail shadow-sm" />
                     <h5 className="mb-0">{ticket.tenPhim}</h5>
                     <span className="small text-uppercase text-muted">{moment(ticket.ngayDat).format('hh:mm A - DD-MM-YYYY')}</span>
                     <p className="mt-2 small text-uppercase ">Địa điểm: {_.first(ticket.danhSachGhe).tenHeThongRap} - {_.first(ticket.danhSachGhe).tenCumRap}</p>
-                    <p className="mt-2 small text-uppercase text-muted">Ghế {ticket.danhSachGhe.map((ghe, i) => {
+                    <p className="mt-2 small text-uppercase text-muted">Ghế {_.sortBy(ticket.danhSachGhe,['tenGhe']).map((ghe, i) => {
                         return <span key={i} className="mr-2" >{ghe.tenGhe}</span>
                     })}</p>
                 </div>
@@ -176,13 +178,13 @@ const KQDatVe = (props) => {
     return (
 
         <div className="container py-5">
-            <div className="row mb-4">
-                <div className="col-lg-5">
-                    <h2 className="display-4 font-weight-light">Our team</h2>
-                    <p className="font-italic text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+            <div className="row mb-4" >
+                <div className="col-lg-12 text-center">
+                    <h2 className="display-4 font-weight-light ">Lịch Sử Đặt Vé Khách Hàng</h2>
+                    <p className="font-italic text-muted">Hãy xem địa chỉ và thời gian để xem phim vui vẽ bạn nhé !</p>
                 </div>
             </div>
-            <div className="row text-center">
+            <div className="row text-center justify-content-center" style={{ gap: '15px' }}>
                 {/* Team item*/}
                 {renderTicketItem()}
                 {/* End*/}
@@ -197,19 +199,32 @@ const KQDatVe = (props) => {
 
 
 const Tab_Booking = (props) => {
+    const { tabActive } = useSelector(state => state.QuanLyDatVeReducer)
+    const dispatch = useDispatch();
+
     return (
         <Tabs className='m-5'
-            defaultActiveKey="1"
+            defaultActiveKey='1' activeKey={tabActive}
             items={[
                 {
-                    label: '01 CHỌN GHẾ & THANH TOÁN',
+                    label: (<h1 onClick={() => {
+                        dispatch({
+                            type: 'CHUYEN_TAB_ACTIVE',
+                            number: '1',
+                        })
+                    }}>01 CHỌN GHẾ & THANH TOÁN</h1>),
                     key: '1',
                     children: (<div>
                         <TicketRoom {...props} />
                     </div>),
                 },
                 {
-                    label: '02 KẾT QUẢ ĐẶT VÉ',
+                    label: (<h1 onClick={() => {
+                        dispatch({
+                            type: 'CHUYEN_TAB_ACTIVE',
+                            number: '2',
+                        })
+                    }}>02 KẾT QUẢ ĐẶT VÉ</h1>),
                     key: '2',
                     children: (<div>
                         <KQDatVe {...props} />

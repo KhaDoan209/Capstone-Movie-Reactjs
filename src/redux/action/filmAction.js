@@ -1,8 +1,9 @@
 import { apiMethod } from '../../services/apiMethod';
-import { GET_BANNER_LIST, GET_FILM_LIST, SET_CHI_TIET_PHIM, SET_CHI_TIET_PHONG_VE } from '../types/filmTypes';
+import { CHUYEN_TAB, DAT_VE_HOAN_TAT, GET_BANNER_LIST, GET_FILM_LIST, SET_CHI_TIET_PHIM, SET_CHI_TIET_PHONG_VE } from '../types/filmTypes';
 import { filmService } from '../../services/filmService';
-import {ThongTinDatVe} from '../../_core/models/ThongTinDatVe'
+import { ThongTinDatVe } from '../../_core/models/ThongTinDatVe'
 import { apiMethod2 } from '../../services/apiMethod2';
+import { displayLoadingAction, hideLoadingAction } from './loadingAction';
 export const getFilmListAction = () => {
    return async (dispatch) => {
       try {
@@ -68,9 +69,21 @@ export const layChiTietPhongVeAction = (maLichChieu) => {
 export const datVeAction = (thongTinDatVe = new ThongTinDatVe()) => {
    return async dispatch => {
       try {
-         let result = await apiMethod2.post(`QuanLyDatVe/DatVe`,thongTinDatVe);
+
+         dispatch(displayLoadingAction)
+
+
+         let result = await apiMethod2.post(`QuanLyDatVe/DatVe`, thongTinDatVe);
          console.log(result.data.content)
+         //Đặt vé thành công thì gọi lap API LOADING LẠI PHÒNG VÉ
+
+         await dispatch(layChiTietPhongVeAction(thongTinDatVe.maLichChieu))
+         await dispatch({ type: DAT_VE_HOAN_TAT })
+         await dispatch(hideLoadingAction)
+         dispatch({type: CHUYEN_TAB})
+
       } catch (error) {
+         dispatch(hideLoadingAction)
          console.log(error);
       }
    }

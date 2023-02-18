@@ -42,3 +42,11 @@
   color: orange !important;
   border: 1px solid orange;
 }
+
+.cursor-pointer {
+  cursor: pointer;
+}
+.sizexxl {
+  font-size: 50px;
+  color: #fff;
+}

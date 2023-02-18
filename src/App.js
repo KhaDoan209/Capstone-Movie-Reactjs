@@ -9,11 +9,16 @@ import Detail from './page/Detail/Detail';
 import TicketRoom from './page/TicketRoom/TicketRoom';
 import Login from './page/Login/Login';
 import Register from './page/Register/Register';
+import Loading from './components/Loading/Loading';
 
 export const history = createBrowserHistory();
 function App() {
    return (
       <Router history={history}>
+
+         <Loading/>
+
+
          <Switch>
             <HomeTemplate
                path='/home'

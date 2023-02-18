@@ -1,8 +1,9 @@
-import { DAT_VE, SET_CHI_TIET_PHONG_VE } from "../types/filmTypes"
+import { DAT_VE, SET_CHI_TIET_PHONG_VE,DAT_VE_HOAN_TAT,CHUYEN_TAB } from "../types/filmTypes"
 import { ThongTinLichChieu } from "../../_core/models/ThongTinPhongVe"
 const stateDefault = {
     chiTietPhongVe: new ThongTinLichChieu(),
-    danhSachGheDangDat: []
+    danhSachGheDangDat: [],
+    tabActive : "1",
 }
 
 export const QuanLyDatVeReducer = (state = stateDefault, action) => {
@@ -23,6 +24,20 @@ export const QuanLyDatVeReducer = (state = stateDefault, action) => {
                 danhSachGheCapNhat.push(action.gheDuocChon)
             }
             return { ...state, danhSachGheDangDat: danhSachGheCapNhat };
+        }
+
+        case DAT_VE_HOAN_TAT : {
+            state.danhSachGheDangDat =[];
+            return { ...state}
+        }
+
+        case CHUYEN_TAB : {
+            state.tabActive = "2";
+            return { ...state}
+        }
+        case 'CHUYEN_TAB_ACTIVE' : {
+            state.tabActive = action.number;
+            return { ...state}
         }
         default:
             return { ...state }
