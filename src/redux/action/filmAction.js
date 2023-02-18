@@ -43,7 +43,6 @@ export const layThongTinChiTietPhim = (id) => {
             `QuanLyRap/LayThongTinLichChieuPhim?maPhim=${id}`
          );
          console.log('result', result);
-         //lay du lieu tu api ve => reducer
          dispatch({
             type: SET_CHI_TIET_PHIM,
             filmDetail: result.data.content,
@@ -76,6 +75,22 @@ export const datVeAction = (thongTinDatVe = new ThongTinDatVe()) => {
    return async (dispatch) => {
       try {
          let result = await apiMethod.post(`QuanLyDatVe/DatVe`, thongTinDatVe);
+         console.log(result.data.content);
+      } catch (error) {
+         console.log(error);
+      }
+   };
+};
+
+export const themPhimUploadHinhAction = (data) => {
+   return async (dispatch) => {
+      try {
+         let result = await apiMethod.post(
+            'QuanLyPhim/ThemPhimUploadHinh',
+            data
+         );
+         alert("Them phim thanh cong")
+
          console.log(result.data.content);
       } catch (error) {
          console.log(error);

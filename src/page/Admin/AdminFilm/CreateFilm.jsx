@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import moment from 'moment';
 import {
    Button,
    DatePicker,
@@ -10,7 +9,12 @@ import {
    Upload,
 } from 'antd';
 import { useFormik } from 'formik';
+import { useDispatch } from 'react-redux';
+import { themPhimUploadHinhAction } from '../../../redux/action/filmAction';
+
 const CreateFilm = () => {
+   const [imgSrc, setImgSrc] = useState(null);
+   const dispatch = useDispatch();
    const formik = useFormik({
       initialValues: {
          tenPhim: '',
@@ -24,16 +28,41 @@ const CreateFilm = () => {
          hinhAnh: {},
       },
       onSubmit: (values) => {
-         console.log(values);
+         let newPhim = new FormData();
+         for (const key in values) {
+            if (key !== 'hinhAnh') {
+               newPhim.append(key, values[key]);
+            } else {
+               newPhim.append('File', values.hinhAnh, values.hinhAnh.name);
+            }
+         }
+         dispatch(themPhimUploadHinhAction(newPhim));
       },
    });
 
    const handleDatePicker = (value) => {
-      // console.log(moment(value).format('DD/MM/YYYY'));
-
-      console.log(value.format('YYYY-MM-DDTHH:MM:SSZ'));
+      let ngayKhoiChieu = value.format('DD/MM/YYYY');
+      formik.setFieldValue('ngayKhoiChieu', ngayKhoiChieu);
    };
 
+   const handleOnSwitch = (name) => {
+      return (value) => {
+         formik.setFieldValue(name, value);
+      };
+   };
+   const handleChangeFile = (e) => {
+      let file = e.target.files[0];
+      if (
+         file.type === 'image/jpeg' ||
+         file.type === 'image/jpg' ||
+         file.type === 'image/png'
+      ) {
+         let reader = new FileReader();
+         reader.readAsDataURL(file);
+         reader.onload = (event) => setImgSrc(event.target.result);
+         formik.setFieldValue('hinhAnh', file);
+      }
+   };
    return (
       <div className='container mt-4'>
          <h1 className='title mb-5'>Thêm Phim Mới</h1>
@@ -73,35 +102,54 @@ const CreateFilm = () => {
                      label='Đang chiếu'
                      valuePropName='checked'
                   >
-                     <Switch />
+                     <Switch
+                        name='dangChieu'
+                        onChange={handleOnSwitch('dangChieu')}
+                     />
                   </Form.Item>
                   <Form.Item
                      label='Sắp chiếu'
                      valuePropName='checked'
                   >
-                     <Switch />
+                     <Switch
+                        name='sapChieu'
+                        onChange={handleOnSwitch('sapChieu')}
+                     />
                   </Form.Item>
                   <Form.Item label='Số sao'>
-                     <InputNumber type='number' />
+                     <InputNumber
+                        min={1}
+                        max={10}
+                        onChange={(value) => {
+                           formik.setFieldValue('danhGia', value);
+                        }}
+                     />
                   </Form.Item>
                   <Form.Item
                      label='Hot'
                      valuePropName='checked'
                   >
-                     <Switch />
+                     <Switch
+                        name='hot'
+                        onChange={handleOnSwitch('hot')}
+                     />
                   </Form.Item>
                   <Form.Item
                      label='Upload Ảnh'
                      valuePropName='fileList'
                   >
-                     <Upload
-                        action='/upload.do'
-                        listType='picture-card'
-                     >
-                        <div>
-                           <div>Upload</div>
-                        </div>
-                     </Upload>
+                     <input
+                        type='file'
+                        onChange={handleChangeFile}
+                     />
+                     <img
+                        accept='image/png,image/jpg,image/jpeg'
+                        className='mt-4'
+                        src={imgSrc}
+                        width={100}
+                        height={150}
+                        alt='...'
+                     />
                   </Form.Item>
                   <Form.Item label='Thêm phim'>
                      <Button
