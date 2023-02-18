@@ -51,11 +51,13 @@ function App() {
                component={AdminUser}
             />
             <AdminTemplate
+               exact
                path='/admin-film'
                component={AdminFilm}
             />
             <AdminTemplate
-               path='/create-film'
+               exact
+               path='/admin-film/create-film'
                component={CreateFilm}
             />
             <HomeTemplate

@@ -35,7 +35,6 @@ const AdminFilm = (props) => {
                className='mx-auto'
                style={{ width: '100px' }}
                src={text}
-               srcset=''
             />
          ),
       },
@@ -115,7 +114,7 @@ const AdminFilm = (props) => {
          <Button
             className='mt-3'
             onClick={() => {
-               history.push('/create-film');
+               history.push('/admin-film/create-film');
             }}
          >
             Thêm Phim
