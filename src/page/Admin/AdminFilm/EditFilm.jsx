@@ -1,31 +1,30 @@
 import React, { useState } from 'react';
-import {
-   Button,
-   DatePicker,
-   Form,
-   Input,
-   InputNumber,
-   Switch,
-   Upload,
-} from 'antd';
+import { Button, DatePicker, Form, Input, InputNumber, Switch } from 'antd';
 import { useFormik } from 'formik';
-import { useDispatch } from 'react-redux';
-import { themPhimUploadHinhAction } from '../../../redux/action/filmAction';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+   layThongTinPhimTheoMaPhim,
+   themPhimUploadHinhAction,
+} from '../../../redux/action/filmAction';
+import { useEffect } from 'react';
 import moment from 'moment';
-const CreateFilm = () => {
-   const [imgSrc, setImgSrc] = useState(null);
+const EditFilm = (props) => {
+   let chiTietFilm = useSelector((state) => state.filmReducer.thongTinFilm);
+   console.log(chiTietFilm.ngayKhoiChieu);
+   const [imgSrc, setImgSrc] = useState('');
    const dispatch = useDispatch();
    const formik = useFormik({
+      enableReinitialize: true,
       initialValues: {
-         tenPhim: '',
-         trailer: '',
-         moTa: '',
-         ngayKhoiChieu: '',
-         dangChieu: '',
-         sapChieu: '',
-         hot: '',
-         danhGia: 0,
-         hinhAnh: {},
+         tenPhim: chiTietFilm.tenPhim,
+         trailer: chiTietFilm.trailer,
+         moTa: chiTietFilm.moTa,
+         ngayKhoiChieu: chiTietFilm.ngayKhoiChieu,
+         dangChieu: chiTietFilm.dangChieu,
+         sapChieu: chiTietFilm.sapChieu,
+         hot: chiTietFilm.hot,
+         danhGia: chiTietFilm.danhGia,
+         hinhAnh: null,
       },
       onSubmit: (values) => {
          let newPhim = new FormData();
@@ -40,12 +39,15 @@ const CreateFilm = () => {
       },
    });
 
+   useEffect(() => {
+      let { id } = props.match.params;
+      dispatch(layThongTinPhimTheoMaPhim(id));
+   }, []);
+
    const handleDatePicker = (value) => {
-      let ngayKhoiChieu = moment(value).format('DD/MM/YYYY');
-      console.log(ngayKhoiChieu);
+      let ngayKhoiChieu = value;
       formik.setFieldValue('ngayKhoiChieu', ngayKhoiChieu);
    };
-
    const handleOnSwitch = (name) => {
       return (value) => {
          formik.setFieldValue(name, value);
@@ -66,7 +68,7 @@ const CreateFilm = () => {
    };
    return (
       <div className='container mt-4'>
-         <h1 className='title mb-5'>Thêm Phim Mới</h1>
+         <h1 className='title mb-5'>Sửa Thông Tin Phim</h1>
          <div className='row'>
             <div className='col-8'>
                <Form
@@ -79,24 +81,31 @@ const CreateFilm = () => {
                      <Input
                         name='tenPhim'
                         onChange={formik.handleChange}
+                        value={formik.values.tenPhim}
                      />
                   </Form.Item>
                   <Form.Item label='Trailer'>
                      <Input
                         name='trailer'
                         onChange={formik.handleChange}
+                        value={formik.values.trailer}
                      />
                   </Form.Item>
                   <Form.Item label='Mô tả'>
                      <Input
                         name='moTa'
                         onChange={formik.handleChange}
+                        value={formik.values.moTa}
                      />
                   </Form.Item>
                   <Form.Item label='Ngày khởi chiếu'>
                      <DatePicker
                         format={'DD/MM/YYYY'}
                         onChange={handleDatePicker}
+                        value={moment(
+                           formik.values.ngayKhoiChieu,
+                           'DD/MM/YYYY'
+                        )}
                      />
                   </Form.Item>
                   <Form.Item
@@ -106,6 +115,7 @@ const CreateFilm = () => {
                      <Switch
                         name='dangChieu'
                         onChange={handleOnSwitch('dangChieu')}
+                        checked={formik.values.dangChieu}
                      />
                   </Form.Item>
                   <Form.Item
@@ -115,6 +125,7 @@ const CreateFilm = () => {
                      <Switch
                         name='sapChieu'
                         onChange={handleOnSwitch('sapChieu')}
+                        checked={formik.values.sapChieu}
                      />
                   </Form.Item>
                   <Form.Item label='Số sao'>
@@ -124,6 +135,7 @@ const CreateFilm = () => {
                         onChange={(value) => {
                            formik.setFieldValue('danhGia', value);
                         }}
+                        value={formik.values.danhGia}
                      />
                   </Form.Item>
                   <Form.Item
@@ -132,6 +144,7 @@ const CreateFilm = () => {
                   >
                      <Switch
                         name='hot'
+                        checked={formik.values.hot}
                         onChange={handleOnSwitch('hot')}
                      />
                   </Form.Item>
@@ -146,7 +159,7 @@ const CreateFilm = () => {
                      <img
                         accept='image/png,image/jpg,image/jpeg'
                         className='mt-4'
-                        src={imgSrc}
+                        src={imgSrc === '' ? chiTietFilm.hinhAnh : imgSrc}
                         width={100}
                         height={150}
                         alt='...'
@@ -169,4 +182,4 @@ const CreateFilm = () => {
    );
 };
 
-export default CreateFilm;
+export default EditFilm;

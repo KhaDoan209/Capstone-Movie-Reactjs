@@ -3,6 +3,7 @@ import {
    GET_FILM_LIST,
    SET_CHI_TIET_PHIM,
    SET_CHI_TIET_PHONG_VE,
+   LAY_THONG_TIN_PHIM_THEO_MA,
 } from '../types/filmTypes';
 import { ThongTinDatVe } from '../../_core/models/ThongTinDatVe';
 import { apiMethod } from '../../services/apiMethod2';
@@ -89,9 +90,25 @@ export const themPhimUploadHinhAction = (data) => {
             'QuanLyPhim/ThemPhimUploadHinh',
             data
          );
-         alert("Them phim thanh cong")
+         alert('Them phim thanh cong');
 
          console.log(result.data.content);
+      } catch (error) {
+         console.log(error);
+      }
+   };
+};
+export const layThongTinPhimTheoMaPhim = (id) => {
+   return async (dispatch) => {
+      try {
+         let result = await apiMethod.get(
+            `/QuanLyPhim/LayThongTinPhim?MaPhim=${id}`
+         );
+         let action = {
+            type: LAY_THONG_TIN_PHIM_THEO_MA,
+            filmDetail: result.data.content,
+         };
+         dispatch(action);
       } catch (error) {
          console.log(error);
       }

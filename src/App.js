@@ -13,6 +13,7 @@ import AdminTemplate from './template/AdminTemplate';
 import AdminFilm from './page/Admin/AdminFilm/AdminFilm';
 import AdminUser from './page/Admin/AdminUser/AdminUser';
 import CreateFilm from './page/Admin/AdminFilm/CreateFilm';
+import EditFilm from './page/Admin/AdminFilm/EditFilm';
 
 export const history = createBrowserHistory();
 function App() {
@@ -59,6 +60,11 @@ function App() {
                exact
                path='/admin-film/create-film'
                component={CreateFilm}
+            />
+            <AdminTemplate
+               exact
+               path='/admin-film/edit-film/:id'
+               component={EditFilm}
             />
             <HomeTemplate
                path='/'

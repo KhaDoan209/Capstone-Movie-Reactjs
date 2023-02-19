@@ -6,7 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import { store } from './redux/configStore';
 import { Provider } from 'react-redux';
 import { ChakraProvider } from '@chakra-ui/react';
-
+import 'antd/dist/antd.css';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
    <Provider store={store}>

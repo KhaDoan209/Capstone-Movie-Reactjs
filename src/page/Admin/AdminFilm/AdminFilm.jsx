@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
-import { Button } from 'antd';
 import { Input } from 'antd';
-import { Space, Table, Tag } from 'antd';
+import { Button, Space, Table } from 'antd';
 import { getFilmListAction } from '../../../redux/action/filmAction';
 import { useSelector, useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
@@ -10,9 +9,9 @@ import { history } from '../../../App';
 const { Search } = Input;
 
 const AdminFilm = (props) => {
-   console.log(props.match);
    const dispatch = useDispatch();
    const film = useSelector((state) => state.filmReducer.filmList);
+
    const columns = [
       {
          title: 'Mã Phim',
@@ -82,18 +81,20 @@ const AdminFilm = (props) => {
          key: 'thaoTac',
          className: 'col-3',
          align: 'center',
-         render: () => {
+         render: (text, film) => {
             return (
                <>
                   <NavLink
-                     to='/'
+                     to={`/admin-film/edit-film/${film.maPhim}`}
                      className='btn btn-primary mr-2'
+                     key={1}
                   >
                      Sửa
                   </NavLink>
                   <NavLink
                      to='/'
                      className='btn btn-danger'
+                     key={2}
                   >
                      Xóa
                   </NavLink>
@@ -130,9 +131,6 @@ const AdminFilm = (props) => {
 
          <Table
             className='mt-4'
-            pagination={{
-               defaultPageSize: 5,
-            }}
             columns={columns}
             dataSource={data}
          />
