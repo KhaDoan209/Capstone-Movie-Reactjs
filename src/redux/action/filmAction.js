@@ -1,9 +1,10 @@
 import { apiMethod } from '../../services/apiMethod';
-import { CHUYEN_TAB, DAT_VE_HOAN_TAT, GET_BANNER_LIST, GET_FILM_LIST, SET_CHI_TIET_PHIM, SET_CHI_TIET_PHONG_VE } from '../types/filmTypes';
+import {DAT_VE,CHUYEN_TAB, DAT_VE_HOAN_TAT, GET_BANNER_LIST, GET_FILM_LIST, SET_CHI_TIET_PHIM, SET_CHI_TIET_PHONG_VE } from '../types/filmTypes';
 import { filmService } from '../../services/filmService';
 import { ThongTinDatVe } from '../../_core/models/ThongTinDatVe'
 import { apiMethod2 } from '../../services/apiMethod2';
 import { displayLoadingAction, hideLoadingAction } from './loadingAction';
+import { connection } from '../../index';
 export const getFilmListAction = () => {
    return async (dispatch) => {
       try {
@@ -80,12 +81,39 @@ export const datVeAction = (thongTinDatVe = new ThongTinDatVe()) => {
          await dispatch(layChiTietPhongVeAction(thongTinDatVe.maLichChieu))
          await dispatch({ type: DAT_VE_HOAN_TAT })
          await dispatch(hideLoadingAction)
-         dispatch({type: CHUYEN_TAB})
+         dispatch({ type: CHUYEN_TAB })
 
       } catch (error) {
          dispatch(hideLoadingAction)
          console.log(error);
       }
+   }
+}
+
+export const datGheAction = (ghe,maLichChieu) => {
+   return async (dispatch,getState) => {
+      // Dua thong tyin ghe len reducer
+      await dispatch({
+         type: DAT_VE,
+         gheDuocChon: ghe
+      })
+
+      //cal api ve backend
+      let danhSachGheDangDat = getState().QuanLyDatVeReducer.danhSachGheDangDat;
+      let taiKhoan = getState().quanLyNguoiDungReducer.userLogin.taiKhoan;
+   
+      console.log('danhSachGheDangDat',danhSachGheDangDat)
+      console.log('taiKhoan',taiKhoan)
+      console.log('maLichChieu',maLichChieu)
+      //biến mảng thành chuỗi do cơ sở dữ liệu setup là kiểu string
+      
+      danhSachGheDangDat = JSON.stringify(danhSachGheDangDat);
+      // taiKhoan =JSON.stringify(taiKhoan)
+
+
+
+      // call api signalR
+      connection.invoke("datGhe",taiKhoan,danhSachGheDangDat,maLichChieu );
    }
 }
 

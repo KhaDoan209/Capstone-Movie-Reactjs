@@ -1,10 +1,10 @@
-import { DAT_VE, SET_CHI_TIET_PHONG_VE,DAT_VE_HOAN_TAT,CHUYEN_TAB } from "../types/filmTypes"
+import { DAT_VE, SET_CHI_TIET_PHONG_VE, DAT_VE_HOAN_TAT, CHUYEN_TAB } from "../types/filmTypes"
 import { ThongTinLichChieu } from "../../_core/models/ThongTinPhongVe"
 const stateDefault = {
     chiTietPhongVe: new ThongTinLichChieu(),
     danhSachGheDangDat: [],
-    danhSachGheKhachDat:[{maghe:48043},{maghe:48044}],
-    tabActive : "1",
+    danhSachGheKhachDat: [{ maGhe: 48043 }, { maGhe: 48044 }],
+    tabActive: "1",
 }
 
 export const QuanLyDatVeReducer = (state = stateDefault, action) => {
@@ -19,26 +19,26 @@ export const QuanLyDatVeReducer = (state = stateDefault, action) => {
             let danhSachGheCapNhat = [...state.danhSachGheDangDat];
             let index = danhSachGheCapNhat.findIndex(gheDD => gheDD.maGhe === action.gheDuocChon.maGhe)
 
-            if (index != -1) {
-                danhSachGheCapNhat.splice(index,1);
+            if (index !== -1) {
+                danhSachGheCapNhat.splice(index, 1);
             } else {
                 danhSachGheCapNhat.push(action.gheDuocChon)
             }
             return { ...state, danhSachGheDangDat: danhSachGheCapNhat };
         }
 
-        case DAT_VE_HOAN_TAT : {
-            state.danhSachGheDangDat =[];
-            return { ...state}
+        case DAT_VE_HOAN_TAT: {
+            state.danhSachGheDangDat = [];
+            return { ...state }
         }
 
-        case CHUYEN_TAB : {
+        case CHUYEN_TAB: {
             state.tabActive = "2";
-            return { ...state}
+            return { ...state }
         }
-        case 'CHUYEN_TAB_ACTIVE' : {
+        case 'CHUYEN_TAB_ACTIVE': {
             state.tabActive = action.number;
-            return { ...state}
+            return { ...state }
         }
         default:
             return { ...state }
