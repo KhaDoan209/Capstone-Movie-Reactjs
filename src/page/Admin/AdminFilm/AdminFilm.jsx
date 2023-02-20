@@ -1,7 +1,10 @@
 import React, { useEffect } from 'react';
 import { Input } from 'antd';
 import { Button, Space, Table } from 'antd';
-import { getFilmListAction } from '../../../redux/action/filmAction';
+import {
+   getFilmListAction,
+   xoaPhimAction,
+} from '../../../redux/action/filmAction';
 import { useSelector, useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { useState } from 'react';
@@ -78,7 +81,7 @@ const AdminFilm = (props) => {
       },
       {
          title: 'Thao tác',
-         key: 'thaoTac',
+         dataIndex: 'maPhim',
          className: 'col-3',
          align: 'center',
          render: (text, film) => {
@@ -91,13 +94,21 @@ const AdminFilm = (props) => {
                   >
                      Sửa
                   </NavLink>
-                  <NavLink
-                     to='/'
+                  <span
+                     onClick={() => {
+                        if (
+                           window.confirm(
+                              'Bạn có chắc muốn xóa phim ' + film.tenPhim
+                           ) == true
+                        ) {
+                           dispatch(xoaPhimAction(film.maPhim));
+                        }
+                     }}
                      className='btn btn-danger'
                      key={2}
                   >
                      Xóa
-                  </NavLink>
+                  </span>
                </>
             );
          },
@@ -108,7 +119,9 @@ const AdminFilm = (props) => {
    }, []);
 
    const data = film;
-
+   const onSearch = (value) => {
+      dispatch(getFilmListAction(value));
+   };
    return (
       <div className='w-90 mt-4'>
          <h1 className='title'>Quản Lý Phim</h1>
@@ -123,13 +136,12 @@ const AdminFilm = (props) => {
          <Search
             className='mt-4'
             placeholder='input search text'
-            onSearch={() => {
-               console.log('search');
-            }}
+            onSearch={onSearch}
             enterButton
          />
 
          <Table
+            rowKey={'maPhim'}
             className='mt-4'
             columns={columns}
             dataSource={data}

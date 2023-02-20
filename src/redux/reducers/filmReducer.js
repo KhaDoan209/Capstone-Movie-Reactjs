@@ -10,6 +10,7 @@ export const filmReducer = (state = initialState, action) => {
    switch (action.type) {
       case GET_FILM_LIST:
          state.filmList = action.filmList;
+         console.log(state.filmList);
          return { ...state };
       case GET_BANNER_LIST:
          state.filmBanner = action.bannerList;

@@ -3,19 +3,19 @@ import { Button, DatePicker, Form, Input, InputNumber, Switch } from 'antd';
 import { useFormik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import {
+   capNhatPhimUpload,
    layThongTinPhimTheoMaPhim,
-   themPhimUploadHinhAction,
 } from '../../../redux/action/filmAction';
 import { useEffect } from 'react';
 import moment from 'moment';
 const EditFilm = (props) => {
    let chiTietFilm = useSelector((state) => state.filmReducer.thongTinFilm);
-   console.log(chiTietFilm.ngayKhoiChieu);
    const [imgSrc, setImgSrc] = useState('');
    const dispatch = useDispatch();
    const formik = useFormik({
       enableReinitialize: true,
       initialValues: {
+         maPhim: chiTietFilm.maPhim,
          tenPhim: chiTietFilm.tenPhim,
          trailer: chiTietFilm.trailer,
          moTa: chiTietFilm.moTa,
@@ -32,13 +32,14 @@ const EditFilm = (props) => {
             if (key !== 'hinhAnh') {
                newPhim.append(key, values[key]);
             } else {
-               newPhim.append('File', values.hinhAnh, values.hinhAnh.name);
+               if (values.hinhAnh !== null) {
+                  newPhim.append('File', values.hinhAnh, values.hinhAnh.name);
+               }
             }
          }
-         dispatch(themPhimUploadHinhAction(newPhim));
+         dispatch(capNhatPhimUpload(newPhim));
       },
    });
-
    useEffect(() => {
       let { id } = props.match.params;
       dispatch(layThongTinPhimTheoMaPhim(id));
@@ -53,17 +54,17 @@ const EditFilm = (props) => {
          formik.setFieldValue(name, value);
       };
    };
-   const handleChangeFile = (e) => {
+   const handleChangeFile = async (e) => {
       let file = e.target.files[0];
       if (
          file.type === 'image/jpeg' ||
          file.type === 'image/jpg' ||
          file.type === 'image/png'
       ) {
+         await formik.setFieldValue('hinhAnh', file);
          let reader = new FileReader();
          reader.readAsDataURL(file);
          reader.onload = (event) => setImgSrc(event.target.result);
-         formik.setFieldValue('hinhAnh', file);
       }
    };
    return (
@@ -102,10 +103,7 @@ const EditFilm = (props) => {
                      <DatePicker
                         format={'DD/MM/YYYY'}
                         onChange={handleDatePicker}
-                        value={moment(
-                           formik.values.ngayKhoiChieu,
-                           'DD/MM/YYYY'
-                        )}
+                        value={moment(formik.values.ngayKhoiChieu)}
                      />
                   </Form.Item>
                   <Form.Item
@@ -167,12 +165,10 @@ const EditFilm = (props) => {
                   </Form.Item>
                   <Form.Item label='Thêm phim'>
                      <Button
-                        onClick={() => {
-                           console.log('Thêm');
-                        }}
+                        onClick={formik.handleSubmit}
                         htmlType='submit'
                      >
-                        Thêm
+                        Sửa
                      </Button>
                   </Form.Item>
                </Form>

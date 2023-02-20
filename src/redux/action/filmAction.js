@@ -7,9 +7,23 @@ import {
 } from '../types/filmTypes';
 import { ThongTinDatVe } from '../../_core/models/ThongTinDatVe';
 import { apiMethod } from '../../services/apiMethod2';
-export const getFilmListAction = () => {
+import { history } from '../../App';
+import { MA_NHOM } from '../../settings/settings';
+
+export const getFilmListAction = (tenFilm = '') => {
    return async (dispatch) => {
       try {
+         if (tenFilm != '') {
+            let result = await apiMethod.get(
+               `QuanLyPhim/LayDanhSachPhim?maNhom=GP01&tenPhim=${tenFilm}`
+            );
+            console.log(result.data.content);
+            let action = {
+               type: GET_FILM_LIST,
+               filmList: result.data.content,
+            };
+            return dispatch(action);
+         }
          let result = await apiMethod.get('QuanLyPhim/LayDanhSachPhim');
          let action = {
             type: GET_FILM_LIST,
@@ -109,6 +123,34 @@ export const layThongTinPhimTheoMaPhim = (id) => {
             filmDetail: result.data.content,
          };
          dispatch(action);
+      } catch (error) {
+         console.log(error);
+      }
+   };
+};
+
+export const capNhatPhimUpload = (data) => {
+   return async (dispatch) => {
+      try {
+         let result = await apiMethod.postAdmin(
+            'QuanLyPhim/CapNhatPhimUpload',
+            data
+         );
+         alert('Cap nhat phim thanh cong');
+         history.push('/admin-film');
+         dispatch(getFilmListAction());
+      } catch (error) {
+         console.log(error);
+      }
+   };
+};
+
+export const xoaPhimAction = (id) => {
+   return async (dispatch) => {
+      try {
+         await apiMethod.delete(`QuanLyPhim/XoaPhim?MaPhim=${id}`);
+         alert('Xóa phim thành công');
+         dispatch(getFilmListAction());
       } catch (error) {
          console.log(error);
       }

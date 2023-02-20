@@ -23,7 +23,6 @@ const Home = () => {
    const lichChieuHeThongRap = useSelector(
       (state) => state.rapPhimReducer.lichChieuHeThongRap
    );
-
    useEffect(() => {
       dispatch(getFilmListAction());
       dispatch(getFilmBannerAction());

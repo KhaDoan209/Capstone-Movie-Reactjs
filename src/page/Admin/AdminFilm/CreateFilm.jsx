@@ -154,9 +154,7 @@ const CreateFilm = () => {
                   </Form.Item>
                   <Form.Item label='Thêm phim'>
                      <Button
-                        onClick={() => {
-                           console.log('Thêm');
-                        }}
+                        onClick={formik.handleSubmit}
                         htmlType='submit'
                      >
                         Thêm
