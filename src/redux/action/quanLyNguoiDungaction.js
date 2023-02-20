@@ -85,9 +85,17 @@ export const capNhatNguoiDungAction = (formData) => {
             let result = await apiMethod2.put(`QuanLyNguoiDung/CapNhatThongTinNguoiDung`, formData);
             console.log("formData", result.data.content)
             if (result.status === 200) {
-                dispatch(dangnhapAction(result.data.content))
+                // dispatch(dangnhapAction(result.data.content))
+                let result1 = await apiMethod2.post(`QuanLyNguoiDung/DangNhap`,result.data.content)
+                localStorage.setItem(ACCESS_TOKEN, result1.data.content.accessToken);
+                let userJSON = JSON.stringify(result1.data.content)
+                localStorage.setItem(userMovie, userJSON);
+                let action = {
+                    type: DANG_NHAP,
+                    userLogin: result1.data.content
+                }
             }
-            history.push('/profile');
+            
 
 
         } catch (error) {
