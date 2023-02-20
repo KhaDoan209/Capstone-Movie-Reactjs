@@ -8,13 +8,12 @@ import { Provider } from 'react-redux';
 import { ChakraProvider } from '@chakra-ui/react';
 import { DOMAIN } from './settings/settings';
 
-
 //cau hinh web socket server 01
 import * as signalR from '@microsoft/signalr';
 
 //cau hinh web socket server 02
 export const connection = new signalR.HubConnectionBuilder().withUrl(`${DOMAIN}/DatVeHub`).configureLogging(signalR.LogLevel.Information).build();
-// let connection = new signalR.HubConnectionBuilder()
+// export const connection = new signalR.HubConnectionBuilder()
 //     .withUrl(`${DOMAIN}/DatVeHub`)
 //     .build();
 

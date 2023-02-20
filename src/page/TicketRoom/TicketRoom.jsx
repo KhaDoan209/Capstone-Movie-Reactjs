@@ -22,11 +22,51 @@ const TicketRoom = (props) => {
         const action = layChiTietPhongVeAction(props.match.params.id)
         dispatch(action)
 
+        //Có 1 client nào đó đặt vé thành công mình sễ load lại danh sách lịch chiếu đó
+        connection.on('datVeThanhCong', () => {
+            dispatch(action);
+        })
+
+
+
+        //Vừa vào trabf load tất cả ghế của người khác đang đặt
+        connection.invoke('loadDanhSachGhe',props.match.params.id)
+
         // Load danh sách ghế đang đặt từ sever về
-        connection.on("loadDanhSachGheDaDat", (dsGheKhachDat) => {
-            console.log('danhsachghekhachdat',dsGheKhachDat);
+        connection.on('loadDanhSachGheDaDat', (dsGheKhachDat) => {
+            //Bước 1: Loại mình ra khỏi danh sách
+            dsGheKhachDat = dsGheKhachDat.filter(item => item.taiKhoan !== userLogin.taiKhoan);
+            //Bước 2: gộp danh sách ghế khách đặt khỏi tất cả user thành 1 mang chung
+
+            let arrGheKhachDat = dsGheKhachDat.reduce((result, item, index) => {
+                let arrGhe = JSON.parse(item.danhSachGhe);
+                return [...result, ...arrGhe]
+            }, [])
+            //Đưa dữ liệu ghế khách đặt cập nhật redux
+            arrGheKhachDat = _.uniqBy(arrGheKhachDat, 'maGhe')
+            //Đưa dữ liệu về redux
+            dispatch({
+                type: 'DAT_GHE',
+                arrGheKhachDat
+            })
+
+
+
+            // Cài dặt sự kiện khi reload trang
+            window.addEventListener('beforeunload', clearGhe);
+
+            return () => {
+                clearGhe();
+                window.removeEventListener('beforeunload', clearGhe);
+            }
+
+            console.log("arr ghe Khach Dat", arrGheKhachDat)
         });
     }, [])
+
+    const clearGhe = (event) => {
+        connection.invoke('huyDat', userLogin.taiKhoan, props.match.params.id);
+    }
 
     console.log({ chiTietPhongVe })
 
@@ -45,7 +85,7 @@ const TicketRoom = (props) => {
             let indexGheKD = danhSachGheKhachDat.findIndex(gheKD => gheKD.maGhe === ghe.maGhe)
             if (indexGheKD !== -1) {
                 classGheKhachDat = 'gheKhachDat';
-                console.log('classGheKhachDat',classGheKhachDat);
+                console.log('classGheKhachDat', classGheKhachDat);
             }
 
             let classGheDaDuocDat = "";
@@ -61,11 +101,11 @@ const TicketRoom = (props) => {
             return <Fragment key={i}>
                 <button onClick={() => {
 
-                    const action = datGheAction(ghe,props.match.params.id);
+                    const action = datGheAction(ghe, props.match.params.id);
                     dispatch(action);
 
 
-                }} disabled={ghe.daDat || classGheKhachDat !==""} className={`ghe ${classGheVip} ${classGheDaDat} ${classGheDangDat} ${classGheDaDuocDat} ${classGheKhachDat} text-center`} key={ghe.maGhe}>
+                }} disabled={ghe.daDat || classGheKhachDat !== ""} className={`ghe ${classGheVip} ${classGheDaDat} ${classGheDangDat} ${classGheDaDuocDat} ${classGheKhachDat} text-center`} key={ghe.maGhe}>
                     {ghe.daDat ? classGheDaDuocDat !== "" ? <UserAddOutlined style={{ marginBottom: 4 }} /> : <CloseOutlined style={{ marginBottom: 4 }} /> : ghe.stt}
                 </button>
                 {(i + 1) % 16 === 0 ? <br /> : ""}

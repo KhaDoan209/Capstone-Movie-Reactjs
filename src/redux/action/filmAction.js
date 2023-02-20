@@ -68,7 +68,7 @@ export const layChiTietPhongVeAction = (maLichChieu) => {
 }
 
 export const datVeAction = (thongTinDatVe = new ThongTinDatVe()) => {
-   return async dispatch => {
+   return async (dispatch,getState) => {
       try {
 
          dispatch(displayLoadingAction)
@@ -81,6 +81,10 @@ export const datVeAction = (thongTinDatVe = new ThongTinDatVe()) => {
          await dispatch(layChiTietPhongVeAction(thongTinDatVe.maLichChieu))
          await dispatch({ type: DAT_VE_HOAN_TAT })
          await dispatch(hideLoadingAction)
+
+         let userLogin = getState().quanLyNguoiDungReducer.userLogin;
+          connection.invoke('datGheThanhCong',userLogin.taiKhoan,thongTinDatVe.maLichChieu);
+
          dispatch({ type: CHUYEN_TAB })
 
       } catch (error) {
@@ -113,7 +117,7 @@ export const datGheAction = (ghe,maLichChieu) => {
 
 
       // call api signalR
-      connection.invoke("datGhe",taiKhoan,danhSachGheDangDat,maLichChieu );
+      connection.invoke('datGhe',taiKhoan,danhSachGheDangDat,maLichChieu);
    }
 }
 
