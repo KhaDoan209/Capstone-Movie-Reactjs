@@ -1,8 +1,8 @@
 import axios from "axios";
 import { ACCESS_TOKEN, userMovie } from "../../settings/settings";
-import { DANG_NHAP, SET_THONG_TIN_NGUOI_DUNG } from "../types/quanLyNguoiDungType";
+import { DANG_NHAP, SET_THONG_TIN_NGUOI_DUNG,CAP_NHAT_THONG_TIN_NGUOI_DUNG } from "../types/quanLyNguoiDungType";
 import { history } from "../../App";
-import {apiMethod2} from '../../services/apiMethod2'
+import { apiMethod2 } from '../../services/apiMethod2'
 export const dangkyAction = (thongTinND) => {
 
     return (dispatch2) => {
@@ -41,7 +41,7 @@ export const dangnhapAction = (thongTinLogin) => {
             //đăng nhập thành công
             alert("Đăng nhập thành công");
             //lưu dữ liệu đăng nhập xuông localstorage
-            
+
             localStorage.setItem(ACCESS_TOKEN, result.data.content.accessToken);
             let userJSON = JSON.stringify(result.data.content)
             localStorage.setItem(userMovie, userJSON);
@@ -63,17 +63,40 @@ export const dangnhapAction = (thongTinLogin) => {
 
 export const layThongTinNguoiDungAction = () => {
     return async dispatch => {
-       try {
-          let result = await apiMethod2.post(`QuanLyNguoiDung/ThongTinTaiKhoan`);
-           console.log("result", result)
-          if (result.status === 200) {
-             dispatch({
-                type: SET_THONG_TIN_NGUOI_DUNG,
-                thongTinNguoiDung : result.data.content
-             })
-          }
-       } catch (error) {
-          console.log(error);
-       }
+        try {
+            let result = await apiMethod2.post(`QuanLyNguoiDung/ThongTinTaiKhoan`);
+            console.log("result", result)
+            if (result.status === 200) {
+                dispatch({
+                    type: SET_THONG_TIN_NGUOI_DUNG,
+                    thongTinNguoiDungCapNhat: result.data.content
+                })
+            }
+        } catch (error) {
+            console.log(error);
+        }
     }
- }
+}
+
+export const capNhatNguoiDungAction = (formData) => {
+    return async dispatch => {
+        try {
+            let result = await apiMethod2.post(`QuanLyNguoiDung/CapNhatThongTinNguoiDung`, formData);
+            alert('cap nhat nguoi dung thanh cong')
+            // if (result.status === 200) {
+            //     console.log('ok roi do')
+            //     dispatch({
+            //         type: CAP_NHAT_THONG_TIN_NGUOI_DUNG,
+            //         thongTinNguoiDung: result.data.content
+            //     })
+            // } else {
+            //     console.log('sai roi', result.status)
+
+            // }
+            console.log('data', result.status)
+        } catch (error) {
+            console.log(error);
+
+        }
+    }
+}

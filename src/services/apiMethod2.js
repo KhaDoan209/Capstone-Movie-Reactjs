@@ -36,9 +36,9 @@ export class APIMethod2 {
       return axios({
          method: 'PUT',
          url: `${API_URL}${url}`,
-         maNhom: 'GP01',
          data: model,
          headers: {
+            Authorization : 'Bearer ' + access_Token,
             TokenCybersoft: TOKEN_CYBER,
          },
       });

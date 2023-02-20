@@ -1,5 +1,5 @@
 import { userMovie,ACCESS_TOKEN } from "../../settings/settings"
-import { DANG_NHAP, SET_THONG_TIN_NGUOI_DUNG } from "../types/quanLyNguoiDungType"
+import { DANG_NHAP, SET_THONG_TIN_NGUOI_DUNG,CAP_NHAT_THONG_TIN_NGUOI_DUNG } from "../types/quanLyNguoiDungType"
 
 let userLogin = null
 if (localStorage.getItem(userMovie)) {
@@ -24,6 +24,9 @@ export const quanLyNguoiDungReducer = (state = initialState, action) => {
     case SET_THONG_TIN_NGUOI_DUNG: {
       state.thongTinNguoiDung = action.thongTinNguoiDung
       return {...state}
+    }
+    case CAP_NHAT_THONG_TIN_NGUOI_DUNG: {
+      state.thongTinNguoiDung = action.thongTinNguoiDungCapNhat
     }
     default:
       return state

@@ -10,6 +10,7 @@ import TicketRoom from './page/TicketRoom/TicketRoom';
 import Login from './page/Login/Login';
 import Register from './page/Register/Register';
 import Loading from './components/Loading/Loading';
+import Profile from './page/Profile/Profile';
 
 export const history = createBrowserHistory();
 function App() {
@@ -31,6 +32,7 @@ function App() {
             <HomeTemplate path="/detail/:id" component={Detail} />
 
             <HomeTemplate path="/ticketroom/:id" component={TicketRoom} />
+            <HomeTemplate path="/profile" component={Profile} />
 
              <FormTemplate  path='/login'
                component={Login}/>
