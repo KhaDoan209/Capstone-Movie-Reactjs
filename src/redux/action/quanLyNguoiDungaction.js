@@ -1,8 +1,9 @@
 import axios from "axios";
 import { ACCESS_TOKEN, userMovie } from "../../settings/settings";
-import { DANG_NHAP, SET_THONG_TIN_NGUOI_DUNG,CAP_NHAT_THONG_TIN_NGUOI_DUNG } from "../types/quanLyNguoiDungType";
+import { DANG_NHAP, SET_THONG_TIN_NGUOI_DUNG, CAP_NHAT_THONG_TIN_NGUOI_DUNG } from "../types/quanLyNguoiDungType";
 import { history } from "../../App";
 import { apiMethod2 } from '../../services/apiMethod2'
+
 export const dangkyAction = (thongTinND) => {
 
     return (dispatch2) => {
@@ -69,7 +70,7 @@ export const layThongTinNguoiDungAction = () => {
             if (result.status === 200) {
                 dispatch({
                     type: SET_THONG_TIN_NGUOI_DUNG,
-                    thongTinNguoiDungCapNhat: result.data.content
+                    thongTinNguoiDung: result.data.content
                 })
             }
         } catch (error) {
@@ -81,19 +82,14 @@ export const layThongTinNguoiDungAction = () => {
 export const capNhatNguoiDungAction = (formData) => {
     return async dispatch => {
         try {
-            let result = await apiMethod2.post(`QuanLyNguoiDung/CapNhatThongTinNguoiDung`, formData);
-            alert('cap nhat nguoi dung thanh cong')
-            // if (result.status === 200) {
-            //     console.log('ok roi do')
-            //     dispatch({
-            //         type: CAP_NHAT_THONG_TIN_NGUOI_DUNG,
-            //         thongTinNguoiDung: result.data.content
-            //     })
-            // } else {
-            //     console.log('sai roi', result.status)
+            let result = await apiMethod2.put(`QuanLyNguoiDung/CapNhatThongTinNguoiDung`, formData);
+            console.log("formData", result.data.content)
+            if (result.status === 200) {
+                dispatch(dangnhapAction(result.data.content))
+            }
+            history.push('/profile');
 
-            // }
-            console.log('data', result.status)
+
         } catch (error) {
             console.log(error);
 

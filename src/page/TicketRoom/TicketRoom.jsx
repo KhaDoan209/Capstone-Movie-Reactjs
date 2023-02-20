@@ -212,15 +212,17 @@ const KQDatVe = (props) => {
 
     const { userLogin } = useSelector(state => state.quanLyNguoiDungReducer);
 
-    const { thongTinNguoiDung } = useSelector(state => state.quanLyNguoiDungReducer);
+    const {thongTinNguoiDung} =useSelector(state => state.quanLyNguoiDungReducer);
+    console.log({ userLogin });
+
     useEffect(() => {
         const action = layThongTinNguoiDungAction()
         dispatch(action)
     }, []);
-    console.log({ thongTinNguoiDung });
+    
 
     const renderTicketItem = () => {
-        return thongTinNguoiDung.thongTinDatVe?.map((ticket, i) => {
+        return thongTinNguoiDung.thongTinDatVe?.map((ticket,i) => {
             return <div className="col-xl-3 col-sm-6 mb-5 shadow-lg" key={i}>
                 <div className="bg-white rounded py-5 px-4"><img src={ticket.hinhAnh} alt="123" className="img-fluid mb-3 img-thumbnail shadow-sm" />
                     <h5 className="mb-0">{ticket.tenPhim}</h5>

@@ -13,7 +13,6 @@ import { useFormik } from 'formik';
 const Profile = (props) => {
     const { userLogin } = useSelector(state => state.quanLyNguoiDungReducer);
     const dispatch = useDispatch();
-    console.log('userLogin', userLogin);
 
     const formik = useFormik({
         //lưu giá trị lấy từ form
@@ -70,7 +69,7 @@ const Profile = (props) => {
                     <fieldset disabled>
                         <label htmlFor="disabledSelect">Loại Tài Khoản</label>
                         <select id="disabledSelect" className="form-control">
-                            <option >{userLogin.maLoaiNguoiDung}</option>
+                            <option value={userLogin.maLoaiNguoiDung} >{userLogin.maLoaiNguoiDung}</option>
                         </select>
                     </fieldset>
                 </div>

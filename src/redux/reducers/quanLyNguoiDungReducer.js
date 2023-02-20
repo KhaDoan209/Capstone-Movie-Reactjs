@@ -7,7 +7,8 @@ if (localStorage.getItem(userMovie)) {
 }
 const initialState = {
   userLogin: userLogin,
-  thongTinNguoiDung:{}
+  thongTinNguoiDung:{},
+  thongTinNguoiDungCapNhat:{}
 }
 export const quanLyNguoiDungReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -26,7 +27,7 @@ export const quanLyNguoiDungReducer = (state = initialState, action) => {
       return {...state}
     }
     case CAP_NHAT_THONG_TIN_NGUOI_DUNG: {
-      state.thongTinNguoiDung = action.thongTinNguoiDungCapNhat
+      state.thongTinNguoiDungCapNhat = action.thongTinNguoiDungCapNhat
     }
     default:
       return state
