@@ -32,7 +32,7 @@ const renderLogin = () => {
     if (useLogin !== null) {
       return <div style={{ position: 'absolute', right: "1%",top:"0%" , color:"white"}}>
         <button>
-          <div className='icon1 ml-5 rounded-full bg-white-200'>
+          <div className='icon1 ml-5  mr-1 rounded-full bg-white-200'>
             {(useLogin != null) ? useLogin.taiKhoan : ""}
           </div>
         </button>
