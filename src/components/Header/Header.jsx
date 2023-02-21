@@ -1,8 +1,48 @@
-import React, { useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 import logo from '../../assets/img/logo.png';
+import { DANG_XUAT } from '../../redux/types/quanLyNguoiDungType';
 const Header = () => {
+   const dispatch = useDispatch()
+   const { useLogin } = useSelector(state => state.quanLyNguoiDungReducer)
+   const renderLogin = () => {
+      if (useLogin !== null) {
+         return <li className='nav-item'>
+            <div className="nav-link">
+               <span style={{ color: "black" ,marginRight:"4px"}}>{(useLogin != null) ? useLogin.taiKhoan : ""}</span>
+               <span onClick={() => {
+                  let action = {
+                     type: DANG_XUAT,
+                     usLogin: null
+                  }
+                  dispatch(action)
+
+               }}>Đăng xuất </span>
+            </div>
+         </li>
+      }
+      else {
+         return <>
+            <li className='nav-item'>
+               <NavLink
+                  className='nav-link'
+                  to='/login'
+               >
+                  Đăng nhập
+               </NavLink>
+            </li>
+            <li className='nav-item'>
+               <NavLink
+                  className='nav-link'
+                  to='/registers'
+               >
+                  Đăng ký
+               </NavLink>
+            </li>
+         </>
+      }
+   }
    return (
       <header className='header'>
          <div className='container'>
@@ -41,6 +81,32 @@ const Header = () => {
                            Home
                         </NavLink>
                      </li>
+                     <li className='nav-item'>
+                        <NavLink
+                           className='nav-link'
+                           to='/showing-movie'
+                        >
+                           Showing Movies
+                        </NavLink>
+                     </li>
+                     <li className='nav-item'>
+                        <NavLink
+                           className='nav-link'
+                           to='/admin-film'
+                        >
+                           Quản lý phim
+                        </NavLink>
+                     </li>
+                     <li className='nav-item'>
+                        <NavLink
+                           className='nav-link'
+                           to='/admin/user'
+                        >
+                           Quản lý người dùng
+                        </NavLink>
+                     </li>
+                     {renderLogin()}
+
                   </ul>
                </div>
             </nav>
