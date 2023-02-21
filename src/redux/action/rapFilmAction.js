@@ -1,4 +1,4 @@
-import { apiMethod } from '../../services/apiMethod2';
+import { apiMethod } from '../../services/apiMethod';
 import { GET_RAP_FILM, GET_LICH_CHIEU_HE_THONG_RAP } from '../types/rapTypes';
 export const getRapFilmAction = () => {
    return async (dispatch) => {

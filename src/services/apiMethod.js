@@ -1,11 +1,11 @@
 import { API_URL } from '../settings/settings';
 import {
    TOKEN_CYBER,
-   ACCESS_TOKEN,
    ACCESS_TOKEN_ADMIN,
+   ACCESS_TOKEN,
 } from '../settings/settings';
 import axios from 'axios';
-export class APIMethod2 {
+export class APIMethod {
    get = (url) => {
       return axios({
          method: 'GET',
@@ -65,4 +65,4 @@ export class APIMethod2 {
       });
    };
 }
-export const apiMethod = new APIMethod2();
+export const apiMethod = new APIMethod();

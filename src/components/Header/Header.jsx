@@ -3,103 +3,6 @@ import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import logo from '../../assets/img/logo.png';
 const Header = () => {
-   const dispatch = useDispatch();
-   const useLogin = useSelector(
-      (state) => state.quanLyNguoiDungReducer.useLogin
-   );
-
-   // const renderHeaderByRole = () => {
-   //    if (useLogin.maLoaiNguoiDung === 'KhachHang') {
-   //       return (
-   //          <>
-   //             <li className='nav-item'>
-   //                <p className='nav-link text-dark text-muted'>
-   //                   Hello {useLogin != null ? useLogin.taiKhoan : ''}
-   //                </p>
-   //             </li>
-   //          </>
-   //       );
-   //    } else {
-   //       return (
-   //          <>
-   //             <li className='nav-item'>
-   //                <NavLink
-   //                   className='nav-link'
-   //                   to='/admin-film'
-   //                >
-   //                   Quản lý phim
-   //                </NavLink>
-   //             </li>
-   //             <li className='nav-item'>
-   //                <NavLink
-   //                   className='nav-link'
-   //                   to='/admin-film'
-   //                >
-   //                   Quản lý user
-   //                </NavLink>
-   //             </li>
-   //          </>
-   //       );
-   //    }
-   // };
-   const renderLogin = () => {
-      if (useLogin !== null) {
-         return (
-            <>
-               <li className='nav-item'>
-                  <p className='nav-link text-dark text-muted'>
-                     Hello {useLogin != null ? useLogin.taiKhoan : ''}
-                  </p>
-               </li>
-               <li className='nav-item'>
-                  <NavLink
-                     className='nav-link'
-                     to='/admin-film'
-                  >
-                     Quản lý phim
-                  </NavLink>
-               </li>
-               {/* {renderHeaderByRole} */}
-               <li className='nav-item'>
-                  <button
-                     className='btn btn-danger'
-                     onClick={() => {
-                        let action = {
-                           type: 'DANG_XUAT',
-                           usLogin: null,
-                        };
-                        dispatch(action);
-                     }}
-                  >
-                     Đăng xuất{' '}
-                  </button>
-               </li>
-            </>
-         );
-      } else {
-         return (
-            <>
-               <button>
-                  <NavLink
-                     className='nav-link'
-                     to='/registers'
-                  >
-                     Registers
-                  </NavLink>
-               </button>
-               <button>
-                  <NavLink
-                     className='nav-link'
-                     to='/login'
-                  >
-                     Login
-                  </NavLink>
-               </button>
-            </>
-         );
-      }
-   };
-
    return (
       <header className='header'>
          <div className='container'>
@@ -138,8 +41,6 @@ const Header = () => {
                            Home
                         </NavLink>
                      </li>
-
-                     {renderLogin()}
                   </ul>
                </div>
             </nav>
