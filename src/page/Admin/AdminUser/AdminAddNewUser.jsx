@@ -3,7 +3,7 @@ import React from 'react'
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
 import { useDispatch } from 'react-redux';
-import { themUser } from '../../redux/action/quanLyNguoiDungaction';
+import { themUser } from '../../../redux/action/quanLyNguoiDungaction';
 
 export default function AdminAddNewUser() {
     let dispatch = useDispatch()

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
-import { capNhatuser, layThongtinuser } from '../../redux/action/quanLyNguoiDungaction';
+import { capNhatuser, layThongtinuser } from '../../../redux/action/quanLyNguoiDungaction';
 export default function AdminEditUser(props) {
     let {thongTinuser} =useSelector(state =>state.quanLyNguoiDungReducer)
     let dispatch = useDispatch()

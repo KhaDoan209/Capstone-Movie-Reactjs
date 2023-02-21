@@ -14,6 +14,8 @@ import AdminUser from './page/Admin/AdminUser/AdminUser';
 import AdminAddNewUser from './page/Admin/AdminUser/AdminAddNewUser';
 import AdminEditUser from './page/Admin/AdminUser/AdminEditUser';
 import Register from './page/Register/Register';
+import 'antd/dist/reset.css';
+
 
 export const history = createBrowserHistory();
 function App() {

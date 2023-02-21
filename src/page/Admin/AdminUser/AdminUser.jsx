@@ -3,7 +3,7 @@ import { Button, Table } from 'antd';
 
 import { AudioOutlined } from '@ant-design/icons';
 import { Input, Space } from 'antd';
-import { layDanhsachuser, timKiemnguoidung, xoaUser } from '../../redux/action/quanLyNguoiDungaction';
+import { layDanhsachuser, timKiemnguoidung, xoaUser } from '../../../redux/action/quanLyNguoiDungaction';
 import { useDispatch, useSelector } from 'react-redux';
 import { object } from 'yup';
 import { NavLink } from 'react-router-dom';
