@@ -15,12 +15,17 @@ import AdminAddNewUser from './page/Admin/AdminUser/AdminAddNewUser';
 
 import AdminEditUser from './page/Admin/AdminUser/AdminEditUser';
 import Register from './page/Register/Register';
-
+import Detail from './page/Detail/Detail';
+import TicketRoom from './page/TicketRoom/TicketRoom';
+import Tab_Profile  from './page/Profile/Profile'
+import Loading from './components/Loading/Loading';
 
 export const history = createBrowserHistory();
 function App() {
    return (
       <Router history={history}>
+
+         <Loading/>
          <Switch>
             <HomeTemplate
                path='/home'
@@ -42,6 +47,10 @@ function App() {
                component={EditFilm}
             
             />
+            <HomeTemplate path="/detail/:id" component={Detail} />
+            <HomeTemplate path="/ticketroom/:id" component={TicketRoom} />
+            <HomeTemplate path="/profile" component={Tab_Profile} />
+
             <FormTemplate path='/login'
                component={Login} />
             <FormTemplate path='/registers'

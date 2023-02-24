@@ -1,9 +1,12 @@
 import axios from "axios";
 import { ACCESS_TOKEN, Bearer, BearerToken, URL_API, userMovie } from "../../utils/setting";
-import { DANG_NHAP, LAY_DS, LAY_TT } from "../types/quanLyNguoiDungType";
+import { DANG_NHAP, LAY_DS, LAY_TT ,SET_THONG_TIN_NGUOI_DUNG} from "../types/quanLyNguoiDungType";
 import { history } from "../../App";
 import { array } from "yup";
 import { MA_NHOM, TOKEN_CYBER } from "../../settings/settings";
+import { apiMethod2 } from '../../services/apiMethod2'
+
+
 export const dangkyAction = (thongTinND) => {
 
     return (dispatch2) => {
@@ -169,5 +172,46 @@ export const timKiemnguoidung = (tenUser) => {
             }
             dispatch2(action)
         })
+    }
+}
+
+
+export const layThongTinNguoiDungAction = () => {
+    return async dispatch => {
+        try {
+            let result = await apiMethod2.post(`QuanLyNguoiDung/ThongTinTaiKhoan`);
+            console.log("result", result)
+            if (result.status === 200) {
+                dispatch({
+                    type: SET_THONG_TIN_NGUOI_DUNG,
+                    thongTinNguoiDung: result.data.content
+                })
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+}
+export const capNhatNguoiDungAction = (formData) => {
+    return async dispatch => {
+        try {
+            let result = await apiMethod2.put(`QuanLyNguoiDung/CapNhatThongTinNguoiDung`, formData);
+            console.log("formData", result.data.content)
+            if (result.status === 200) {
+                // dispatch(dangnhapAction(result.data.content))
+                let result1 = await apiMethod2.post(`QuanLyNguoiDung/DangNhap`,result.data.content)
+                localStorage.setItem(ACCESS_TOKEN, result1.data.content.accessToken);
+                let userJSON = JSON.stringify(result1.data.content)
+                localStorage.setItem(userMovie, userJSON);
+                let action = {
+                    type: DANG_NHAP,
+                    userLogin: result1.data.content
+                }
+            }
+
+        } catch (error) {
+            console.log(error);
+
+        }
     }
 }
