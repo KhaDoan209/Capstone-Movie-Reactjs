@@ -5,12 +5,14 @@ import logo from '../../assets/img/logo.png';
 import { DANG_XUAT } from '../../redux/types/quanLyNguoiDungType';
 const Header = () => {
    const dispatch = useDispatch()
-   const { useLogin } = useSelector(state => state.quanLyNguoiDungReducer)
+   const { userLogin } = useSelector(state => state.quanLyNguoiDungReducer)
+   console.log(userLogin)
+
    const renderLogin = () => {
-      if (useLogin !== null) {
+      if (userLogin !== null) {
          return <li className='nav-item'>
             <div className="nav-link">
-               <span style={{ color: "black" ,marginRight:"4px"}}>{(useLogin != null) ? useLogin.taiKhoan : ""}</span>
+               <span style={{ color: "black" ,marginRight:"4px"}}>{(userLogin != null) ? userLogin.taiKhoan : ""}</span>
                <span onClick={() => {
                   let action = {
                      type: DANG_XUAT,

@@ -17,7 +17,7 @@ import AdminEditUser from './page/Admin/AdminUser/AdminEditUser';
 import Register from './page/Register/Register';
 import Detail from './page/Detail/Detail';
 import TicketRoom from './page/TicketRoom/TicketRoom';
-import Tab_Profile  from './page/Profile/Profile'
+import Tab_Profile from './page/Profile/Profile'
 import Loading from './components/Loading/Loading';
 
 export const history = createBrowserHistory();
@@ -25,7 +25,7 @@ function App() {
    return (
       <Router history={history}>
 
-         <Loading/>
+         <Loading />
          <Switch>
             <HomeTemplate
                path='/home'
@@ -45,7 +45,7 @@ function App() {
                exact
                path='/admin-film/edit-film/:id'
                component={EditFilm}
-            
+
             />
             <HomeTemplate path="/detail/:id" component={Detail} />
             <HomeTemplate path="/ticketroom/:id" component={TicketRoom} />
@@ -57,9 +57,9 @@ function App() {
                component={Register} />
             <AdminTemplateUser exact path='/admin/user'
                component={AdminUser} />
-            <AdminTemplate exact path='/admin/user/adduser'
+            <AdminTemplateUser exact path='/admin/user/adduser'
                component={AdminAddNewUser} />
-            <AdminTemplate exact path='/admin/edituser/:id'
+            <AdminTemplateUser exact path='/admin/edituser/:id'
                component={AdminEditUser} />
             <HomeTemplate
                path='/'

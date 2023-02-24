@@ -17,23 +17,23 @@ import { DANG_XUAT } from '../redux/types/quanLyNguoiDungType';
 const { Header, Sider, Content } = Layout;
 
 export default function AdminTemplateUser(props) {
-  const { useLogin } = useSelector(state => state.quanLyNguoiDungReducer)
+  const { userLogin } = useSelector(state => state.quanLyNguoiDungReducer)
   const [collapsed, setCollapsed] = useState(false);
   let dispatch = useDispatch()
   if (!localStorage.getItem(userMovie)){
     alert('Bạn chưa đăng nhập')
     history.push('/login')
   }
-  if (useLogin.maLoaiNguoiDung !== "QuanTri") {
+  if (userLogin.maLoaiNguoiDung !== "QuanTri") {
     alert('Bạn không có quyền truy cập vào trang này')
     history.push('/')
   }
 const renderLogin = () => {
-    if (useLogin !== null) {
+    if (userLogin !== null) {
       return <div style={{ position: 'absolute', right: "1%",top:"0%" , color:"white"}}>
         <button>
           <div className='icon1 ml-5  mr-1 rounded-full bg-white-200'>
-            {(useLogin != null) ? useLogin.taiKhoan : ""}
+            {(userLogin != null) ? userLogin.taiKhoan : ""}
           </div>
         </button>
         <button onClick={() => {

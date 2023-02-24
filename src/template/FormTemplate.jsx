@@ -7,11 +7,11 @@ export const FormTemplate = (props) => {
     return <Route exact path={props.path} render={(propsRoute) => {
         return <>
             <div className="form">
-                <header className='headerform text-center'>
+                <header className='headerform '>
                     <div className="container content">
                         <div className="title ">
-                            <a href="#">
-                                <img src={movie} className="img" alt="" />
+                            <a href="#" className='img1 '>
+                                <img src={movie} className="img2 " alt="" />
                             </a>
                         </div>
                     </div>

@@ -8,7 +8,6 @@ import { apiMethod2 } from '../../services/apiMethod2'
 
 
 export const dangkyAction = (thongTinND) => {
-
     return (dispatch2) => {
         let promise = axios({
             method: "POST",
