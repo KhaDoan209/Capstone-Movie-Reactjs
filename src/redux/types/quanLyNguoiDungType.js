@@ -1,0 +1,7 @@
+export const DANG_NHAP = "DANG_NHAP";
+export const LAY_DS="LAY_DS"
+export const LAY_TT="LAY_TT"
+export const DANG_XUAT="DANG_XUAT"
+export const SET_THONG_TIN_NGUOI_DUNG = "SET_THONG_TIN_NGUOI_DUNG";
+export const CAP_NHAT_THONG_TIN_NGUOI_DUNG = "CAP_NHAT_THONG_TIN_NGUOI_DUNG";
+

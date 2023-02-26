@@ -1,0 +1,219 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body,
+html {
+  letter-spacing: 0.7px;
+  scroll-behavior: smooth;
+}
+
+.logo {
+  border-radius: 50%;
+  width: 100px;
+  display: flex;
+  margin: auto;
+}
+
+.card-film {
+  position: relative;
+}
+.card-film img {
+  border-radius: 8px;
+  width: 450px;
+  object-fit: cover;
+}
+.card-film .card-film-infor-before {
+  border-radius: 8px;
+  position: absolute;
+  bottom: 0;
+  height: 100%;
+  right: 0;
+  left: 0;
+  opacity: 0;
+  transition: all 0.5s;
+  background: rgba(1, 1, 1, 0.8);
+  transform: translate3d(0, 0, 0);
+}
+.card-film .card-film-infor-before .infor-before-inner {
+  position: absolute;
+  color: white;
+  bottom: 5%;
+  left: 0;
+  right: 0;
+  font-family: "Oswald", sans-serif;
+}
+.card-film:hover {
+  cursor: pointer;
+}
+.card-film:hover .card-film-infor-before {
+  opacity: 1;
+}
+
+.card-film-infor-before .film-trailer-btn {
+  position: relative;
+  height: 70px;
+  text-align: center;
+}
+.card-film-infor-before .film-trailer-btn a {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  background: #f7c83b;
+  line-height: 58px;
+  width: 60px;
+  height: 60px;
+  border-radius: 100%;
+  transition: all 0.3s;
+}
+.card-film-infor-before .film-trailer-btn a:hover {
+  background: #fce08c;
+}
+.card-film-infor-before .film-action a {
+  color: white;
+}
+.card-film-infor-before .film-action a:hover {
+  color: rgba(255, 255, 255, 0.8);
+}
+.card-film-infor-before .film-action a:hover:after {
+  content: "";
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  display: block;
+  background-color: rgba(255, 200, 0, 0.956);
+}
+
+.carousel-movies .carousel-inner {
+  height: 70vh;
+}
+.carousel-movies .carousel-inner .carousel-item img {
+  width: 100%;
+  object-fit: cover;
+}
+
+header {
+  background-color: rgba(250, 250, 250, 0.901);
+  width: 100%;
+}
+header .container nav .nav-item .nav-link.active:after {
+  bottom: 0;
+  content: "";
+  width: 100%;
+  height: 2px;
+  display: block;
+  background-color: rgba(255, 200, 0, 0.956);
+}
+header .container nav .nav-item .nav-link {
+  color: black !important;
+}
+header .container nav .nav-item .nav-link:hover:after {
+  bottom: 0;
+  content: "";
+  width: 100%;
+  height: 2px;
+  display: block;
+  background-color: rgba(152, 148, 133, 0.956);
+}
+
+.admin-nav .list-group-item {
+  color: #ffffff;
+  background: none;
+  border: none;
+  font-weight: 600;
+  font-style: 18px;
+  line-height: 28px;
+  margin: auto 0;
+  width: 100%;
+}
+.admin-nav .list-group-item:hover {
+  background: none;
+  border-bottom: 2px solid #ffffff;
+  border-radius: 0px;
+}
+.admin-nav .list-group-item.active {
+  color: #ffffff;
+  background: none;
+  border-radius: 0px;
+  border-bottom: 2px solid #ffffff;
+}
+
+.admin-navigation .menu-col-2 {
+  min-height: 100vh;
+  background: #00152a;
+  border-right: 2px solid #e2e8f0;
+  border-radius: 8px;
+}
+.admin-navigation nav {
+  background: #00152a;
+  border-radius: 6px;
+  display: block !important;
+}
+.admin-navigation nav .header {
+  width: 90%;
+}
+
+.form .headerform {
+  background-color: #0f1d2f;
+  margin-bottom: 50px;
+}
+.form .headerform .content {
+  height: 84px;
+}
+.form .headerform .content .title {
+  font-size: 45px;
+  color: white;
+}
+.form .headerform .content .title .img {
+  width: 100px;
+}
+.form .formdk {
+  background-color: #f5f5f5;
+  border: 1px solid #e3e3e3;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+.form .formdk .form-group {
+  margin: 10px 20px;
+}
+.form .formdk .form-group .form-control {
+  border-radius: 4px;
+  width: 100%;
+  height: 35px;
+}
+.form .image {
+  display: flex;
+  align-items: center;
+}
+
+.home .title {
+  color: rgba(160, 40, 40, 0.699);
+  font-family: "Oswald", sans-serif;
+}
+.home .swiper-horizontal > .swiper-pagination-bullets,
+.home .swiper-pagination-bullets.swiper-pagination-horizontal {
+  position: relative;
+}
+.home .rap-phim {
+  border-radius: 8px;
+  padding: 10px 20px;
+  transition: all 0.3s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.18);
+}
+.home .rap-phim:hover {
+  cursor: pointer;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.04), 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.w-90 {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.title {
+  font-size: 35px;
+  font-weight: bold;
+}/*# sourceMappingURL=main.css.map */
