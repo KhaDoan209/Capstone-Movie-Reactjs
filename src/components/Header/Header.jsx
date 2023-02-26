@@ -4,47 +4,68 @@ import { NavLink } from 'react-router-dom';
 import logo from '../../assets/img/logo.png';
 import { DANG_XUAT } from '../../redux/types/quanLyNguoiDungType';
 const Header = () => {
-   const dispatch = useDispatch()
-   const { userLogin } = useSelector(state => state.quanLyNguoiDungReducer)
-   console.log(userLogin)
+   const dispatch = useDispatch();
+   const { userLogin } = useSelector((state) => state.quanLyNguoiDungReducer);
 
    const renderLogin = () => {
       if (userLogin !== null) {
-         return <li className='nav-item'>
-            <div className="nav-link">
-               <span style={{ color: "black" ,marginRight:"4px"}}>{(userLogin != null) ? userLogin.taiKhoan : ""}</span>
-               <span onClick={() => {
-                  let action = {
-                     type: DANG_XUAT,
-                     usLogin: null
-                  }
-                  dispatch(action)
-
-               }}>Đăng xuất </span>
-            </div>
-         </li>
+         return (
+            <>
+               <li className='nav-item'>
+                  <NavLink
+                     className='nav-link'
+                     to='/admin-film'
+                  >
+                     Quản lý phim
+                  </NavLink>
+               </li>
+               <li className='nav-item'>
+                  <div className='nav-link'>
+                     <span style={{ color: 'black', marginRight: '4px' }}>
+                        {userLogin != null ? userLogin.taiKhoan : ''}
+                     </span>
+                  </div>
+               </li>
+               <li className='nav-item'>
+                  <div className='nav-link'>
+                     <span
+                        onClick={() => {
+                           let action = {
+                              type: DANG_XUAT,
+                              usLogin: null,
+                           };
+                           dispatch(action);
+                        }}
+                     >
+                        Đăng xuất{' '}
+                     </span>
+                  </div>
+               </li>
+            </>
+         );
+      } else {
+         return (
+            <>
+               <li className='nav-item'>
+                  <NavLink
+                     className='nav-link'
+                     to='/login'
+                  >
+                     Đăng nhập
+                  </NavLink>
+               </li>
+               <li className='nav-item'>
+                  <NavLink
+                     className='nav-link'
+                     to='/registers'
+                  >
+                     Đăng ký
+                  </NavLink>
+               </li>
+            </>
+         );
       }
-      else {
-         return <>
-            <li className='nav-item'>
-               <NavLink
-                  className='nav-link'
-                  to='/login'
-               >
-                  Đăng nhập
-               </NavLink>
-            </li>
-            <li className='nav-item'>
-               <NavLink
-                  className='nav-link'
-                  to='/registers'
-               >
-                  Đăng ký
-               </NavLink>
-            </li>
-         </>
-      }
-   }
+   };
    return (
       <header className='header'>
          <div className='container'>
@@ -83,22 +104,7 @@ const Header = () => {
                            Home
                         </NavLink>
                      </li>
-                     <li className='nav-item'>
-                        <NavLink
-                           className='nav-link'
-                           to='/showing-movie'
-                        >
-                           Showing Movies
-                        </NavLink>
-                     </li>
-                     <li className='nav-item'>
-                        <NavLink
-                           className='nav-link'
-                           to='/admin-film'
-                        >
-                           Quản lý phim
-                        </NavLink>
-                     </li>
+
                      <li className='nav-item'>
                         <NavLink
                            className='nav-link'
@@ -108,7 +114,6 @@ const Header = () => {
                         </NavLink>
                      </li>
                      {renderLogin()}
-
                   </ul>
                </div>
             </nav>
