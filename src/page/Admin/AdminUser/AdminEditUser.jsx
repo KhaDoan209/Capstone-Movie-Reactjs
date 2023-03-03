@@ -8,7 +8,6 @@ export default function AdminEditUser(props) {
     let dispatch = useDispatch()
     useEffect(() => {
         let { id } = props.match.params
-        console.log(id)
         let action = layThongtinuser(id);
         dispatch(action)
     }, [])

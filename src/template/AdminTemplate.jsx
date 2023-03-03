@@ -1,7 +1,15 @@
 import React from 'react';
 import { NavLink, Route } from 'react-router-dom';
 import logo from '../assets/img/logo.png';
+import { useSelector } from 'react-redux';
+import { history } from '../App';
 export const AdminTemplate = (props) => {
+   const { userLogin } = useSelector((state) => state.quanLyNguoiDungReducer);
+
+   if (userLogin.maLoaiNguoiDung !== 'QuanTri') {
+      alert('Bạn không có quyền truy cập vào trang này');
+      history.push('/');
+   }
    return (
       <Route
          exact
