@@ -10,9 +10,6 @@ export const FormTemplate = (props) => {
                 <header className='headerform '>
                     <div className="container content">
                         <div className="title ">
-                            <a href="#" className='img1 '>
-                                <img src={movie} className="img2 " alt="" />
-                            </a>
                         </div>
                     </div>
                 </header>
